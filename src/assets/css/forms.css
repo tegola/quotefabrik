@@ -1,0 +1,24 @@
+input[type=text],
+input[type=email],
+input[type=password],
+textarea {
+  display: inline-block;
+  width: 100%;
+  font: inherit;
+  padding: 0.5rem 0.8rem;
+  border-radius: var(--border-radius);
+  border: 1px solid var(--form-control-border);
+}
+
+button {
+  font: inherit;
+  padding: var(--control-padding);
+}
+
+.form-field {
+	margin-bottom: 1rem;
+}
+.form-field__label {
+  display: block;
+  margin-bottom: 0.5rem;
+}

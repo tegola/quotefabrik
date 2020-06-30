@@ -1,0 +1,6 @@
+:root {
+  --primary: #0af;
+  --control-padding: 0.5rem 0.8rem;
+  --border-radius: 0.25rem;
+  --form-control-border: rgba(0, 0, 0, 0.1);
+}

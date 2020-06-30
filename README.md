@@ -1,4 +1,4 @@
-# sparkfabrik-dev-challenge
+# quotefabrik
 
 ## Project setup
 ```

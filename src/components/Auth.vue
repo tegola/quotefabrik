@@ -13,6 +13,7 @@
       <div class="form-field">
         <label class="form-field__label" for="email">E-mail address</label>
         <input
+          class="form-input"
           type="email"
           autocomplete="email"
           v-model="loginModel.email"
@@ -21,13 +22,14 @@
       <div class="form-field">
         <label class="form-field__label" for="password">Password</label>
         <input
+          class="form-input"
           type="password"
           autocomplete="password"
           v-model="loginModel.password"
           id="password">
       </div>
       <p v-if="loginError">{{ loginError }}</p>
-      <button type="submit" :disabled="!canLogin">Sign in</button>
+      <button class="button" type="submit" :disabled="!canLogin">Sign in</button>
     </form>
 
     <form v-if="action === 'register'" @submit.prevent="register">
@@ -42,6 +44,7 @@
       <div class="form-field">
         <label class="form-field__label" for="email">E-mail address</label>
         <input
+          class="form-input"
           type="email"
           autocomplete="email"
           v-model="registerModel.email"
@@ -50,13 +53,14 @@
       <div class="form-field">
         <label class="form-field__label" for="password">Password</label>
         <input
+          class="form-input"
           type="password"
           autocomplete="password"
           v-model="registerModel.password"
           id="password">
       </div>
       <p v-if="registerError">{{ registerError }}</p>
-      <button type="submit" :disabled="!canRegister">Register</button>
+      <button class="button" type="submit" :disabled="!canRegister">Register</button>
     </form>
 
     <div v-if="loading">Loading...</div>

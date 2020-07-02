@@ -2,15 +2,15 @@
   <form @submit.prevent="add">
     <div class="form-field">
       <label class="form-field__label" for="text">Quote</label>
-      <textarea v-model="text" id="text"></textarea>
+      <textarea class="form-input" v-model="text" id="text"></textarea>
     </div>
 
     <div class="form-field">
       <label class="form-field__label" for="author">Author</label>
-      <input type="text" v-model="author" id="author" placeholder="(optional)">
+      <input class="form-input" type="text" v-model="author" id="author" placeholder="(optional)">
     </div>
 
-    <button type="submit" :disabled="!canSubmit">Save</button>
+    <button class="button" type="submit" :disabled="!canSubmit">Save</button>
 
     <p v-if="saving">Saving...</p>
   </form>

@@ -8,14 +8,32 @@ Vue.use(Vuex);
 const store = new Vuex.Store({
 	state: {
 		user: null,
-		quotes: []
+		quotes: [],
+		filter: ''
 	},
 
 	mutations: {
 		setUser(state, user) {
 			state.user = user
 		},
+
+		setFilter(state, filter) {
+			state.filter = filter
+		},
+
 		...vuexfireMutations
+	},
+
+	getters: {
+		filteredQuotes: state => {
+			if (state.filter) {
+				const re = new RegExp(state.filter, 'i')
+
+				return state.quotes.filter(quote => quote.text.match(re) || quote.author.match(re))
+			} else {
+				return state.quotes
+			}
+		}
 	},
 
 	actions: {

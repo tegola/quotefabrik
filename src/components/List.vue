@@ -1,19 +1,18 @@
 <template>
-  <div>
-    <ul>
-      <li v-for="quote in quotes" :key="quote.id">
-        <div>{{ quote.text }}</div>
-        <div>{{ quote.author }}</div>
+  <ul class="quote-list">
+    <li v-for="quote in quotes" :key="quote.id" class="item">
+      <div>
+        <blockquote class="quote" v-html="highlight(quote.text)" />
+        <cite class="author" v-html="highlight(quote.author)" />
         <small>Added {{ formatDate(quote.created_at.toDate()) }}</small>
-        <button @click="copy(quote)">Copy</button>
-      </li>
-    </ul>
-
-    <textarea ref="copyArea" readonly tabindex="-1"></textarea>
-  </div>
+      </div>
+      <CopyButton :quote="quote" />
+    </li>
+  </ul>
 </template>
 
 <script>
+import { mapState } from 'vuex'
 export default {
   name: 'List',
 
@@ -24,17 +23,20 @@ export default {
     }
   },
 
-  methods: {
-    copy(quote) {
-      const el = this.$refs.copyArea
-      const text = [quote.text, quote.author]
-        .filter(i => i)
-        .join('\n –');
+  computed: {
+    ...mapState(['filter'])
+  },
 
-      el.value = text
-      el.select();
-      document.execCommand('copy')
-      el.value = ''
+  methods: {
+    highlight(content) {
+      if (this.filter) {
+        const re = new RegExp(this.filter, 'ig')
+        return content.replace(re, match => {
+          return `<span class="highlight">${match}</span>`
+        })
+      } else {
+        return content
+      }
     },
 
     formatDate(date) {
@@ -48,8 +50,50 @@ export default {
 </script>
 
 <style scoped>
-textarea {
+.quote-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.75rem 1.25rem;
+  border-radius: var(--radius);
+  transition: 200ms;
+  cursor: pointer;
+}
+.item:hover {
+  background-color: white;
+  box-shadow: 0 1px 2px rgba(var(--black-rgb), 0.25), 0 3px 5px rgba(var(--black-rgb), 0.1);
+}
+.quote {
+  margin: 0;
+  font-size: 1.25rem;
+}
+.author {
+  display: block;
+  font-style: normal;
+}
+/deep/ .highlight {
+  position: relative;
+}
+/deep/ .highlight::before {
+  content: '';
   position: absolute;
-  left: -10000px;
+  top: 0;
+  left: -0.3rem;
+  right: -0.3rem;
+  bottom: -0.1rem;
+  background-color: #fe0;
+  border-radius: var(--radius);
+  z-index: -1;
+  animation: highlight 300ms;
+}
+@keyframes highlight {
+  50% {
+    transform: scale(1.2);
+  }
 }
 </style>

@@ -15,7 +15,7 @@
 
 <script>
 export default {
-  name: 'QuoteList',
+  name: 'List',
 
   props: {
     quotes: {
@@ -29,7 +29,7 @@ export default {
       const el = this.$refs.copyArea
       const text = [quote.text, quote.author]
         .filter(i => i)
-        .join('\n\n–');
+        .join('\n –');
 
       el.value = text
       el.select();

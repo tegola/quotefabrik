@@ -4,17 +4,20 @@
       <label class="form-field__label" for="text">Quote</label>
       <textarea v-model="text" id="text"></textarea>
     </div>
+
     <div class="form-field">
       <label class="form-field__label" for="author">Author</label>
       <input type="text" v-model="author" id="author" placeholder="(optional)">
     </div>
-    <button type="submit">Save</button>
+
+    <button type="submit" :disabled="!canSubmit">Save</button>
+
     <p v-if="saving">Saving...</p>
   </form>
 </template>
 
 <script>
-import { db } from '@/firebase'
+import { mapState } from 'vuex'
 
 export default {
   name: 'QuoteForm',
@@ -28,20 +31,33 @@ export default {
   },
 
   computed: {
-    user() {
-      return this.$root.user
+    ...mapState(['user']),
+
+    canSubmit() {
+      return !!this.text
+    }
+  },
+
+  created() {
+    // Handle bookmarklet input and clean url
+    // FIXME: Doesn't work with IE (any version)
+    const urlParams = new URLSearchParams(location.search)
+    const params = Object.fromEntries(urlParams.entries())
+
+    if (params.t) {
+      this.text = params.t
+      history.replaceState({}, '', location.href.replace(location.search, ''))
     }
   },
 
   methods: {
     async add() {
       this.saving = true
+
       try {
-        await db.collection('quotes').add({
-          user_id: this.user.uid,
+        await this.$store.dispatch('addQuote', {
           text: this.text,
-          author: this.author,
-          created_at: new Date()
+          author: this.author
         })
 
         this.text = ''

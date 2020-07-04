@@ -13,14 +13,10 @@ export default {
   name: 'User',
 
   computed: {
-    ...mapState(['user', 'filter', 'formOpen']),
+    ...mapState(['user']),
   },
 
   methods: {
-    openForm() {
-      this.$store.commit('setFormOpen', true)
-    },
-
     signout() {
       auth.signOut()
     }
@@ -40,7 +36,7 @@ export default {
 }
 .user__signout {
   color: var(--muted);
-  font-size: 0.8rem;
+  font-size: 0.75rem;
   text-transform: uppercase;
   letter-spacing: 0.1em;
   cursor: pointer;
@@ -52,6 +48,6 @@ export default {
   color: white;
 }
 .user__signout:active {
-  opacity: 0.75;
+  opacity: var(--active-opacity);
 }
 </style>

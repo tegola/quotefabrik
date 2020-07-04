@@ -2,7 +2,13 @@
   <form class="add-form" @submit.prevent="submit">
     <div class="form-field">
       <label class="form-field__label" for="text">Quote</label>
-      <textarea class="form-input" rows="5" autofocus v-model="text" id="text"></textarea>
+      <textarea
+        ref="quoteField"
+        class="form-input"
+        rows="5"
+        v-model="text"
+        id="text"
+      />
     </div>
 
     <div class="form-field">
@@ -50,6 +56,10 @@ export default {
     bookmarklet() {
       return `javascript:(function(){location='${location.href}?t='+encodeURIComponent(document.getSelection().toString())})()`;
     }
+  },
+
+  mounted() {
+    this.$refs.quoteField.focus()
   },
 
   methods: {

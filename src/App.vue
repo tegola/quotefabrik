@@ -5,9 +5,10 @@
     <template v-else>
       <User />
       <Toolbar />
+
       <AddForm v-if="formOpen" />
 
-      <Suggestion />
+      <Suggestion v-if="suggestionOpen" />
 
       <template v-if="filteredQuotes.length">
         <Item
@@ -30,7 +31,12 @@ export default {
   name: 'App',
 
   computed: {
-    ...mapState(['user', 'filter', 'formOpen']),
+    ...mapState([
+      'user',
+      'filter',
+      'suggestionOpen',
+      'formOpen'
+      ]),
     ...mapGetters(['filteredQuotes']),
   },
 

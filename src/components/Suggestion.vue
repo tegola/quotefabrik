@@ -5,6 +5,7 @@
       {{ current.author }}
     </div>
     <button class="button" type="button" @click="random">Another</button>
+    <button class="button" type="button" @click="hide">Close</button>
   </div>
 </template>
 
@@ -38,6 +39,10 @@ export default {
       const index = Math.floor(Math.random() * (this.quotes.length - 0)) + 0
 
       this.current = this.quotes[index];
+    },
+
+    hide() {
+      this.$store.commit('setSuggestionOpen', false)
     }
   }
 }

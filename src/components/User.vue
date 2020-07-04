@@ -34,7 +34,7 @@ export default {
 
 <style scoped>
 .user {
-  padding: 0.5rem 0.5em 0 1rem;
+  padding: 2rem 0.5em 0 1rem;
   display: flex;
 	align-items: baseline;
   justify-content: space-between;

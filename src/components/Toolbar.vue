@@ -1,6 +1,10 @@
 <template>
   <div class="toolbar">
     <div class="toolbar__search">
+      <Icon
+        name="search"
+        class="toolbar__search-icon"
+      />
       <input
         class="toolbar__search-input"
         type="text"
@@ -8,13 +12,15 @@
         :value="filter"
         @keyup.esc="clear"
         @input="search">
-      <button
+      <Button
         v-if="filter"
         class="toolbar__search-clear"
-        title="Clear search filter"
-        @click="clear">
-        <Icon name="close" />
-      </button>
+        variant="naked"
+        icon="close"
+        icon-only
+        title="Clear search"
+        @click="clear"
+      />
     </div>
      <transition name="slide-fade">
       <Button
@@ -82,7 +88,7 @@ export default {
   height: 100%;
   width: 100%;
   font-size: 1.15rem;
-  padding: 0 1rem;
+  padding: 0 1rem 0 2.5rem;
   border-radius: var(--radius-pill);
   background: rgba(var(--dark-rgb), 0.05);
   transition: var(--transition-duration);
@@ -91,18 +97,26 @@ export default {
 .toolbar__search-input:focus {
   background-color: transparent;
 }
+.toolbar__search-input::placeholder {
+  color: var(--muted);
+}
+
+.toolbar__search-icon {
+  position: absolute;
+  top: 50%;
+  margin-top: -0.8rem;
+  left: 0.5rem;
+  color: var(--muted);
+}
+
 .toolbar__search-clear {
   position: absolute;
   top: 50%;
-  margin-top: -1rem;
-  right: 0.5rem;
+  margin-top: -0.85rem;
+  right: 0.4rem;
   padding: 0;
-  border: 0;
-  border-radius: 2rem;
-  width: 2rem;
-  height: 2rem;
-  background-color: var(--light);
-  outline: none;
+  width: 1.75rem;
+  height: 1.75rem;
 }
 .toolbar__search-clear:focus {
   background-color: var(--dark);

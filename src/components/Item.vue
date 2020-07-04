@@ -1,15 +1,19 @@
 <template>
   <div class="item" tabindex="0">
-    <div>
+    <div class="body">
       <blockquote class="quote" v-html="highlight(quote.text)" />
       <cite class="author" v-html="highlight(author)" />
     </div>
     <div class="actions">
       <CopyButton :quote="quote" />
       <slot name="actions">
-        <Button type="button" @click="deleteQuote" title="Delete">
-          <Icon name="trash" />
-        </Button>
+        <Button
+          variant="white"
+          icon="trash"
+          icon-only
+          title="Delete"
+          @click="deleteQuote"
+        />
       </slot>
     </div>
   </div>
@@ -62,11 +66,12 @@ export default {
 <style scoped>
 .item {
   display: flex;
-  align-items: center;
+  flex-direction: column;
+  align-items: stretch;
   justify-content: space-between;
   padding: 0.75rem 1.25rem;
   border-radius: var(--radius);
-  transition: 200ms;
+  transition: var(--transition-duration);
   cursor: pointer;
   outline: none;
 }
@@ -75,13 +80,13 @@ export default {
   box-shadow: var(--box-shadow);
 }
 
-/* Content */
+/* Body */
 .quote {
   margin: 0;
   font-family: var(--font-serif);
   font-style: italic;
-  font-size: 1.25rem;
-  line-height: 1.35;
+  font-size: 1.15rem;
+  line-height: 1.5;
 }
 .author {
   margin-top: 0.5rem;
@@ -92,11 +97,11 @@ export default {
 
 /* Actions */
 .actions {
-  flex-shrink: 1;
-  margin-left: 1rem;
   display: flex;
-  flex-direction: column;
-  align-items: center;
+  justify-content: flex-end;
+}
+.actions .button + .button {
+  margin-left: 0.25rem;
 }
 
 /* Highlight */
@@ -118,6 +123,38 @@ export default {
 @keyframes highlight {
   50% {
     transform: scale(1.2);
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .item {
+    flex-direction: row;
+  }
+  .body {
+    align-self: center;
+  }
+  .actions {
+    flex-direction: column;
+    flex-shrink: 1;
+    justify-content: center;
+    border-top: 0;
+    padding-top: 0;
+    border-left: 1px solid var(--separator-color);
+    padding-left: 1rem;
+    margin-left: 1rem;
+  }
+  .actions .button + .button {
+    margin-left: 0;
+    margin-top: 0.25rem;
+  }
+}
+@media (hover: hover) {
+  .actions {
+    opacity: 0;
+    transition: var(--transition-duration);
+  }
+  .item:hover .actions {
+    opacity: 1;
   }
 }
 </style>

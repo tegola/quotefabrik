@@ -2,8 +2,13 @@
   <div class="user">
     <h1 class="user__greeting">Hello <strong>{{ user.displayName }}</strong>.</h1>
     <div>
-      <a class="user__signout" type="button" @click="signout">Sign out</a>
-      <Button tag="a" size="sm" @click="signout">Signout</Button>
+      <Button
+        class="user__signout"
+        size="sm"
+        variant="naked"
+        @click="signout">
+        Sign out
+      </Button>
     </div>
   </div>
 </template>
@@ -39,18 +44,9 @@ export default {
 }
 .user__signout {
   color: var(--muted);
-  font-size: 0.75rem;
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-  cursor: pointer;
-  padding: 0.25em 0.5em;
-  border-radius: var(--radius-sm);
 }
 .user__signout:hover {
   background-color: var(--muted);
   color: white;
-}
-.user__signout:active {
-  opacity: var(--active-opacity);
 }
 </style>

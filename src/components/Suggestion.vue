@@ -3,18 +3,19 @@
     <div>
       <div class="head">
         <p class="head__label">Suggested</p>
-        <div>
+        <div class="head__actions">
           <Button
             v-if="currentQuote"
             size="sm"
+            variant="white"
             icon="shuffle"
+            icon-only
             @click="random">
             Get another
           </Button>
-          &nbsp;
           <Button
             size="sm"
-            icon="close"
+            variant="white"
             @click="hide">
             Hide
           </Button>
@@ -25,9 +26,12 @@
 
       <Item v-else-if="currentQuote" :quote="currentQuote">
         <template #actions>
-          <Button @click="add">
-            <Icon name="plus" />
-          </Button>
+          <Button
+            variant="white"
+            icon="plus"
+            icon-only
+            @click="add"
+          />
         </template>
       </Item>
     </div>
@@ -98,10 +102,13 @@ export default {
   justify-content: space-between;
   padding: 0.25rem 0 0.5rem;
   color: var(--muted);
-  border-bottom: 1px solid rgba(var(--dark-rgb), 0.05);
+  border-bottom: 1px solid var(--separator-color);
 }
 .head__label {
   margin: 0;
+}
+.head__actions .button + .button {
+  margin-left: 0.25rem;
 }
 
 /* Loader */

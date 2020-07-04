@@ -6,6 +6,7 @@
         type="text"
         placeholder="Search..."
         :value="filter"
+        @keyup.esc="clear"
         @input="search">
       <button
         v-if="filter"
@@ -85,7 +86,7 @@ export default {
   padding: 0 1rem;
   border-radius: var(--radius);
   background: rgba(var(--dark-rgb), 0.05);
-  transition: 200ms;
+  transition: var(--transition-duration);
   outline: none;
 }
 .toolbar__search-input:focus {
@@ -133,7 +134,7 @@ export default {
 
 .slide-fade-enter-active,
 .slide-fade-leave-active {
-  transition: all .3s ease-out;
+  transition: all 200ms ease-out;
 }
 .slide-fade-enter, .slide-fade-leave-to {
   transform: translateX(1rem);

@@ -90,8 +90,7 @@ export default {
   padding: 1rem;
 }
 .bookmarklet {
-  border-top: 1px solid var(--light);
+  border-top: 1px solid var(--separator-color);
   margin-bottom: 0;
-  color: var(--gray);
 }
 </style>

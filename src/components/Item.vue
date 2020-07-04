@@ -72,13 +72,9 @@ export default {
   padding: 0.75rem 1.25rem;
   border-radius: var(--radius);
   transition: var(--transition-duration);
-  cursor: pointer;
   outline: none;
 }
-.item:hover {
-  background-color: white;
-  box-shadow: var(--box-shadow);
-}
+
 
 /* Body */
 .quote {
@@ -116,7 +112,7 @@ export default {
   right: -0.3rem;
   bottom: -0.1rem;
   background-color: #fe0;
-  border-radius: var(--radius);
+  border-radius: var(--radius-sm);
   z-index: -1;
   animation: highlight 300ms;
 }
@@ -149,6 +145,10 @@ export default {
   }
 }
 @media (hover: hover) {
+  .item:hover {
+    background-color: white;
+    box-shadow: var(--box-shadow);
+  }
   .actions {
     opacity: 0;
     transition: var(--transition-duration);

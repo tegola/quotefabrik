@@ -7,7 +7,14 @@
 
     <div class="form-field">
       <label class="form-field__label" for="author">Author</label>
-      <input class="form-input" type="text" v-model="author" id="author" placeholder="(optional)">
+      <input
+        class="form-input"
+        type="text"
+        v-model="author"
+        autocorrect="off"
+        spellcheck="false"
+        id="author"
+        placeholder="(optional)">
     </div>
 
     <Button type="reset">Cancel</Button>
@@ -68,6 +75,7 @@ export default {
         this.text = ''
         this.author = ''
         this.hide()
+        window.scrollTo(0, 0);
       } catch (e) {
         alert('There was an error while trying to save this quote.')
       } finally {

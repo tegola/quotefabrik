@@ -45,6 +45,7 @@ export default {
     },
 
     clear() {
+      window.scrollTo(0, 0);
       this.$store.commit('setFilter', '')
     },
 

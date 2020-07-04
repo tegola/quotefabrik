@@ -9,7 +9,6 @@
             size="sm"
             variant="white"
             icon="shuffle"
-            icon-only
             @click="random">
             Get another
           </Button>
@@ -74,6 +73,7 @@ export default {
       try {
         await this.$store.dispatch('addQuote', this.currentQuote)
 
+        window.scrollTo(0, 0);
         this.random()
       } catch (e) {
         alert('There was an error while trying to save this quote.')

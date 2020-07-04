@@ -1,14 +1,14 @@
 <template>
   <div>
-    <div v-if="current">
-      <div>
-        {{ current.text }}<br>
-        {{ current.author }}
-      </div>
-
+    <div v-if="currentQuote">
+      <p>Suggestion</p>
       <button class="button" type="button" @click="random">Another</button>
-      <button class="button" type="button" @click="add">Add</button>
-      <button class="button" type="button" @click="hide">Close</button>
+      <button class="button" type="button" @click="hide">Hide</button>
+      <Item :quote="currentQuote">
+        <template #actions>
+          <button class="button" type="button" @click="add">Add</button>
+        </template>
+      </Item>
     </div>
   </div>
 </template>
@@ -20,7 +20,7 @@ export default {
   data() {
     return {
       quotes: [],
-      current: null
+      currentQuote: null
     }
   },
 
@@ -44,15 +44,12 @@ export default {
     random() {
       const index = Math.floor(Math.random() * (this.quotes.length - 0)) + 0
 
-      this.current = this.quotes[index];
+      this.currentQuote = this.quotes[index];
     },
 
     async add() {
       try {
-        await this.$store.dispatch('addQuote', {
-          text: this.current.text,
-          author: this.current.author
-        })
+        await this.$store.dispatch('addQuote', this.currentQuote)
 
         this.random()
       } catch (e) {

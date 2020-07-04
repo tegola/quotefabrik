@@ -12,7 +12,7 @@
         class="button toolbar__search-clear"
         title="Clear search filter"
         @click="clear">
-        <span class="toolbar__search-clear-icon">&times;</span>
+        &times;
       </button>
     </div>
      <transition name="slide-fade">
@@ -103,13 +103,9 @@ export default {
   border-radius: calc(var(--radius) / 2);
   width: 1.5rem;
   height: 1.5rem;
-  font-size: 2rem;
+  font-size: 1.4rem;
   font-weight: 200;
   letter-spacing: 0;
-}
-.toolbar__search-clear-icon {
-  position: relative;
-  top: -0.1em;
 }
 
 /* Add */

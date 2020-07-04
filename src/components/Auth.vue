@@ -166,7 +166,10 @@ export default {
 
 <style scoped>
 .auth {
-  width: 20rem;
+  width: 300px;
+  align-self: center;
+  margin-left: auto;
+  margin-right: auto;
 }
 .logo {
   text-align: center;
@@ -190,8 +193,12 @@ export default {
   flex: 1;
   text-align: center;
 }
+.tab + .tab {
+  margin-left: 0.25rem;
+}
 .tab__radio {
-  display: none;
+  position: absolute;
+  opacity: 0.01;
 }
 .tab__label {
   display: block;
@@ -199,9 +206,8 @@ export default {
   border-radius: var(--radius-sm);
   transition: 200ms;
 }
-.tab__radio:not(:checked):hover ~ .tab__label {
+.tab__radio:not(:checked):focus ~ .tab__label {
   background-color: var(--light);
-
 }
 .tab__radio:checked ~ .tab__label {
   background-color: var(--dark);

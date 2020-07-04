@@ -3,10 +3,13 @@
     <div>
       <blockquote class="quote" v-html="highlight(quote.text)" />
       <cite class="author" v-html="highlight(author)" />
-      <small>Added {{ formattedDate }}</small>
     </div>
-    <CopyButton :text="quote.text" :author="author" />
-    <button type="button" class="button" @click="deleteQuote">Delete</button>
+    <div class="actions">
+      <CopyButton :text="quote.text" :author="author" />
+      <slot name="actions">
+        <button type="button" class="button" @click="deleteQuote">Delete</button>
+      </slot>
+    </div>
   </div>
 </template>
 
@@ -28,13 +31,6 @@ export default {
 
     author() {
       return this.quote.author || 'anonymous'
-    },
-
-    formattedDate() {
-      return this.quote.created_at.toDate().toLocaleString('en', {
-        dateStyle: 'long',
-        timeStyle: 'short'
-      })
     }
   },
 
@@ -75,14 +71,31 @@ export default {
   background-color: white;
   box-shadow: var(--box-shadow);
 }
+
+/* Content */
 .quote {
   margin: 0;
+  font-family: var(--font-serif);
+  font-style: italic;
   font-size: 1.25rem;
 }
 .author {
+  margin-top: 0.25rem;
   display: block;
   font-style: normal;
+  color: var(--muted);
 }
+
+/* Actions */
+.actions {
+  flex-shrink: 1;
+  margin-left: 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Highlight */
 .highlight {
   position: relative;
 }

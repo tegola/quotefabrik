@@ -2,7 +2,7 @@
   <div id="app">
     <Auth v-if="!user" />
 
-    <template v-else>
+    <div v-else class="content">
       <User />
       <Toolbar />
 
@@ -20,7 +20,7 @@
       <div v-else class="no-items">
         No quotes {{ filter ? 'found' : '' }}
       </div>
-    </template>
+    </div>
   </div>
 </template>
 
@@ -55,6 +55,24 @@ export default {
 </script>
 
 <style scoped>
+#app {
+  min-height: 100%;
+  margin-left: 0.5rem;
+  margin-right: 0.5rem;
+  display: flex;
+}
+@media screen and (min-width: 768px) {
+  #app {
+    margin-left: auto;
+    margin-right: auto;
+    width: 700px;
+  }
+}
+
+.content {
+  flex: 1;
+}
+
 /* No items */
 .no-items {
   font-size: 1.5rem;

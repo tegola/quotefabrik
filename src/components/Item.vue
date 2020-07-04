@@ -1,60 +1,64 @@
 <template>
-  <ul class="quote-list">
-    <li v-for="quote in quotes" :key="quote.id" class="item">
-      <div>
-        <blockquote class="quote" v-html="highlight(quote.text)" />
-        <cite class="author" v-html="highlight(quote.author)" />
-        <small>Added {{ formatDate(quote.created_at.toDate()) }}</small>
-      </div>
-      <CopyButton :quote="quote" />
-    </li>
-  </ul>
+  <div class="item">
+    <div>
+      <blockquote class="quote" v-html="highlight(quote.text)" />
+      <cite v-if="quote.author" class="author" v-html="highlight(quote.author)" />
+      <cite v-else class="author">Anonymous</cite>
+      <small>Added {{ formattedDate }}</small>
+    </div>
+    <CopyButton :quote="quote" />
+    <button type="button" class="button" @click="deleteQuote">Delete</button>
+  </div>
 </template>
 
 <script>
 import { mapState } from 'vuex'
+
 export default {
-  name: 'List',
+  name: 'Item',
 
   props: {
-    quotes: {
-      type: Array,
-      default: () => []
+    quote: {
+      type: Object,
+      required: true
     }
   },
 
   computed: {
-    ...mapState(['filter'])
+    ...mapState(['filter']),
+
+    formattedDate() {
+      return this.quote.created_at.toDate().toLocaleString('en', {
+        dateStyle: 'long',
+        timeStyle: 'short'
+      })
+    }
   },
 
   methods: {
     highlight(content) {
       if (this.filter) {
         const re = new RegExp(this.filter, 'ig')
+        const scopeId = this.$options._scopeId
+
         return content.replace(re, match => {
-          return `<span class="highlight">${match}</span>`
+          return `<span ${scopeId} class="highlight">${match}</span>`
         })
       } else {
         return content
       }
     },
 
-    formatDate(date) {
-      return date.toLocaleString('en', {
-        dateStyle: 'long',
-        timeStyle: 'short'
-      })
+    deleteQuote() {
+      if (confirm('Delete the selected quote?')) {
+        this.$store.dispatch('deleteQuote', this.quote.id)
+      }
     }
   }
 }
 </script>
 
 <style scoped>
-.quote-list {
-  margin: 0;
-  padding: 0;
-  list-style: none;
-}
 .item {
   display: flex;
   align-items: center;
@@ -66,7 +70,7 @@ export default {
 }
 .item:hover {
   background-color: white;
-  box-shadow: 0 1px 2px rgba(var(--black-rgb), 0.25), 0 3px 5px rgba(var(--black-rgb), 0.1);
+  box-shadow: var(--box-shadow);
 }
 .quote {
   margin: 0;
@@ -76,10 +80,10 @@ export default {
   display: block;
   font-style: normal;
 }
-/deep/ .highlight {
+.highlight {
   position: relative;
 }
-/deep/ .highlight::before {
+.highlight::before {
   content: '';
   position: absolute;
   top: 0;

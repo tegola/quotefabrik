@@ -1,8 +1,8 @@
 <template>
-  <form @submit.prevent="add">
+  <form @submit.prevent="submit" @reset="hide">
     <div class="form-field">
       <label class="form-field__label" for="text">Quote</label>
-      <textarea class="form-input" v-model="text" id="text"></textarea>
+      <textarea class="form-input" v-model="text" id="text" rows="5"></textarea>
     </div>
 
     <div class="form-field">
@@ -10,9 +10,15 @@
       <input class="form-input" type="text" v-model="author" id="author" placeholder="(optional)">
     </div>
 
+    <button class="button" type="reset">Cancel</button>
     <button class="button" type="submit" :disabled="!canSubmit">Save</button>
 
     <p v-if="saving">Saving...</p>
+
+    <p class="bookmarklet">
+      Tip: Save quote from anywhere. Drag the following element to your bookmarks bar:<br>
+      <a :href="bookmarklet" @click.prevent>Save quote</a>
+    </p>
   </form>
 </template>
 
@@ -20,7 +26,7 @@
 import { mapState } from 'vuex'
 
 export default {
-  name: 'QuoteForm',
+  name: 'AddForm',
 
   data() {
     return {
@@ -31,27 +37,26 @@ export default {
   },
 
   computed: {
-    ...mapState(['user']),
+    ...mapState(['user', 'bookmarkletText']),
 
     canSubmit() {
       return !!this.text
+    },
+
+    bookmarklet() {
+      return `javascript:(function(){location='${location.href}?t='+encodeURIComponent(document.getSelection().toString())})()`;
     }
   },
 
-  created() {
-    // Handle bookmarklet input and clean url
-    // FIXME: Doesn't work with IE (any version)
-    const urlParams = new URLSearchParams(location.search)
-    const params = Object.fromEntries(urlParams.entries())
-
-    if (params.t) {
-      this.text = params.t
-      history.replaceState({}, '', location.href.replace(location.search, ''))
+  mounted() {
+    if (this.bookmarkletText) {
+      this.text = this.bookmarkletText
+      this.$store.commit('setBookmarkletText', '')
     }
   },
 
   methods: {
-    async add() {
+    async submit() {
       this.saving = true
 
       try {
@@ -62,12 +67,25 @@ export default {
 
         this.text = ''
         this.author = ''
+        this.hide()
       } catch (e) {
         alert('There was an error while trying to save this quote.')
       } finally {
         this.saving = false
       }
+    },
+
+    hide() {
+      this.$store.commit('setFormOpen', false)
     }
   }
 }
 </script>
+
+<style scoped>
+.bookmarklet {
+  text-align: center;
+  font-size: 0.9rem;
+  color: var(--gray);
+}
+</style>

@@ -1,6 +1,6 @@
 <template>
   <span>
-    <a href type="button" @click.prevent="copy">Copy</a>
+    <a href type="button" @click.prevent="copy">{{ copied ? 'Copied' : 'Copy' }}</a>
     <textarea ref="textarea" readonly tabindex="-1"></textarea>
   </span>
 </template>
@@ -16,6 +16,12 @@ export default {
     }
   },
 
+  data() {
+    return {
+      copied: false
+    }
+  },
+
   methods: {
     copy() {
       const el = this.$refs.textarea
@@ -27,6 +33,11 @@ export default {
       el.select();
       document.execCommand('copy')
       el.value = ''
+
+      this.copied = true
+      setTimeout(() => {
+        this.copied = false
+      }, 1000)
     }
   }
 }

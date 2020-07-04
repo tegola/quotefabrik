@@ -9,7 +9,9 @@ const store = new Vuex.Store({
 	state: {
 		user: null,
 		quotes: [],
-		filter: ''
+		filter: '',
+		formOpen: false,
+		bookmarkletText: ''
 	},
 
 	mutations: {
@@ -19,6 +21,14 @@ const store = new Vuex.Store({
 
 		setFilter(state, filter) {
 			state.filter = filter
+		},
+
+		setFormOpen(state, open) {
+			state.formOpen = open
+		},
+
+		setBookmarkletText(state, text) {
+			state.bookmarkletText = text
 		},
 
 		...vuexfireMutations
@@ -40,7 +50,10 @@ const store = new Vuex.Store({
 		bindQuotesRef: firestoreAction(({ state, bindFirestoreRef }) => {
 			return bindFirestoreRef(
 				'quotes',
-				db.collection('quotes').where('user_id', '==', state.user.uid)
+				db
+					.collection('quotes')
+					.where('user_id', '==', state.user.uid)
+					.orderBy('created_at', 'desc')
 			)
 		}),
 
@@ -48,13 +61,20 @@ const store = new Vuex.Store({
 			return unbindFirestoreRef('quotes')
 		}),
 
-		addQuote({ state }, { text, author }) {
+		addQuote: ({ state }, { text, author }) => {
 			return db.collection('quotes').add({
 				user_id: state.user.uid,
 				text,
 				author,
 				created_at: new Date()
 			})
+		},
+
+		deleteQuote: (_, quoteId) => {
+			db
+				.collection('quotes')
+				.doc(quoteId)
+				.delete()
 		}
 	}
 })

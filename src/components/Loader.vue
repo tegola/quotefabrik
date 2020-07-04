@@ -1,5 +1,5 @@
 <template>
-  <div class="spinner" title="Loading...">
+  <div class="loader" title="Loading...">
     <div class="dot"></div>
     <div class="dot"></div>
     <div class="dot"></div>
@@ -8,19 +8,19 @@
 
 <script>
 export default {
-  name: 'Spinner'
+  name: 'Loader'
 }
 </script>
 
 <style scoped>
-.spinner {
-  display: flex;
+.loader {
+  display: inline-flex;
 }
 .dot {
-  margin: 0.25rem;
-  width: 0.5rem;
-  height: 0.5rem;
-  background-color: var(--black);
+  margin: 0.15rem;
+  width: 0.25rem;
+  height: 0.25rem;
+  background-color: var(--color, var(--dark));
   border-radius: 50%;
   animation: dot 1s infinite;
 }
@@ -33,10 +33,10 @@ export default {
 @keyframes dot {
   /* 2 steps to keep the element centered */
   0%, 100% {
-    transform: translateY(0.5rem);
+    transform: translateY(0.25rem);
   }
   50% {
-    transform: translateY(-0.5rem);
+    transform: translateY(-0.25rem);
   }
 }
 </style>

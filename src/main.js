@@ -1,14 +1,14 @@
 import Vue from 'vue'
 import App from '@/App'
 
+import AddForm from '@/components/AddForm'
 import Auth from '@/components/Auth'
-import Bookmarklet from '@/components/Bookmarklet'
 import CopyButton from '@/components/CopyButton'
-import Header from '@/components/Header'
-import List from '@/components/List'
-import QuoteForm from '@/components/QuoteForm'
+import Item from '@/components/Item'
+import Loader from '@/components/Loader'
 import SearchInput from '@/components/SearchInput'
-import Spinner from '@/components/Spinner'
+import Toolbar from '@/components/Toolbar'
+import User from '@/components/User'
 
 import store from '@/store'
 
@@ -16,14 +16,14 @@ import '@/assets/css/index.css'
 
 Vue.config.productionTip = false
 
+Vue.component('AddForm', AddForm)
 Vue.component('Auth', Auth)
-Vue.component('Bookmarklet', Bookmarklet)
 Vue.component('CopyButton', CopyButton)
-Vue.component('Header', Header)
-Vue.component('List', List)
-Vue.component('QuoteForm', QuoteForm)
+Vue.component('Item', Item)
+Vue.component('Loader', Loader)
 Vue.component('SearchInput', SearchInput)
-Vue.component('Spinner', Spinner)
+Vue.component('Toolbar', Toolbar)
+Vue.component('User', User)
 
 new Vue({
   render: h => h(App),

@@ -3,7 +3,9 @@
 }
 .form-field__label {
   display: block;
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.25rem;
+  margin-left: 0.25rem;
+  color: var(--gray);
 }
 
 .form-input {
@@ -12,19 +14,19 @@
   font: inherit;
   padding: var(--control-padding);
   border-radius: var(--radius);
-  border: 1px solid rgba(var(--black-rgb), 0.1);
+  border: 1px solid rgba(var(--dark-rgb), 0.1);
   outline: none;
   transition: 200ms;
 }
 .form-input:focus {
   border-color: transparent;
-  box-shadow: 0 0 0 2px var(--black) inset;
+  box-shadow: 0 0 0 2px var(--dark) inset;
 }
 
 .button {
   font: inherit;
   padding: var(--control-padding);
-  background-color: var(--black);
+  background-color: var(--dark);
   color: white;
   border: 0;
   border-radius: var(--radius);
@@ -33,14 +35,19 @@
   line-height: 1.25rem;
   letter-spacing: 0.1em;
   cursor: pointer;
+  transition: all 200ms, visibility 0;
 }
-.button:focus {
+button:disabled {
+  cursor: default;
+  color: rgba(255, 255, 255, 0.5);
+}
+.button:focus:not(:disabled) {
   outline: none;
 }
-.button:hover,
-.button:focus {
-  opacity: 0.75
+.button:hover:not(:disabled),
+.button:focus:not(:disabled) {
+  box-shadow: 0 0 0 2px white;
 }
-.button:active {
-  opacity: 0.5;
+.button:active:not(:disabled) {
+  opacity: 0.75;
 }

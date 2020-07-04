@@ -1,7 +1,6 @@
 <template>
   <div class="search-input">
     <input
-        class="form-input input"
         type="text"
         placeholder="Search quotes..."
         :value="filter"
@@ -44,21 +43,20 @@ export default {
   position: relative;
 }
 .input {
-  border-radius: 2rem;
   padding-left: 1rem;
   padding-right: 2rem;
 }
 .button {
   position: absolute;
-  top: 0.45rem;
-  right: 0.45rem;
-  bottom: 0.45rem;
+  top: 0.4rem;
+  right: 0.4rem;
+  bottom: 0.4rem;
   padding: 0;
-  border-radius: 50%;
-  font-size: 1.9rem;
+  border-radius: calc(var(--radius) / 2);
+  font-size: 2rem;
   font-weight: 200;
-  width: 1.5rem;
-  height: 1.5rem;
+  width: 1.6rem;
+  height: 1.6rem;
   line-height: 0;
   letter-spacing: 0;
 }

@@ -129,6 +129,8 @@ export default {
           this.loginModel.email,
           this.loginModel.password
         )
+
+        this.$router.push('/')
       } catch (e) {
         alert(errorMsgs[e.code] || 'There was an error while trying to login.')
       } finally {
@@ -149,6 +151,8 @@ export default {
           displayName: this.registerModel.name
         })
         this.$store.commit('setUser', user)
+
+        this.$router.push('/')
       } catch (e) {
         alert(errorMsgs[e.code] || 'There was an error while trying to register.')
       } finally {
@@ -162,9 +166,7 @@ export default {
 <style scoped>
 .auth {
   width: 280px;
-  align-self: center;
-  margin-left: auto;
-  margin-right: auto;
+  margin: auto;
 }
 .logo {
   text-align: center;

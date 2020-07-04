@@ -1,5 +1,5 @@
 <template>
-  <form class="add-form" @submit.prevent="submit" @reset="hide">
+  <form class="add-form" @submit.prevent="submit">
     <div class="form-field">
       <label class="form-field__label" for="text">Quote</label>
       <textarea class="form-input" v-model="text" id="text" rows="5"></textarea>
@@ -17,10 +17,11 @@
         placeholder="(optional)">
     </div>
 
-    <Button type="reset" variant="light">Cancel</Button>
-    <Button type="submit" :disabled="!canSubmit">Save</Button>
-
-    <p v-if="saving">Saving...</p>
+    <Button tag="router-link" to="/" variant="light">Cancel</Button>
+    <Button type="submit" :disabled="!canSubmit">
+      <Loader v-if="saving" size="sm" />
+      <template v-else>Save</template>
+    </Button>
 
     <p class="bookmarklet">
       Tip: Save quote from anywhere. Drag the following element to your bookmarks bar:<br>
@@ -30,10 +31,8 @@
 </template>
 
 <script>
-import { mapState } from 'vuex'
-
 export default {
-  name: 'AddForm',
+  name: 'Add',
 
   data() {
     return {
@@ -44,21 +43,12 @@ export default {
   },
 
   computed: {
-    ...mapState(['user', 'bookmarkletText']),
-
     canSubmit() {
       return !!this.text
     },
 
     bookmarklet() {
       return `javascript:(function(){location='${location.href}?t='+encodeURIComponent(document.getSelection().toString())})()`;
-    }
-  },
-
-  mounted() {
-    if (this.bookmarkletText) {
-      this.text = this.bookmarkletText
-      this.$store.commit('setBookmarkletText', '')
     }
   },
 
@@ -74,23 +64,26 @@ export default {
 
         this.text = ''
         this.author = ''
-        this.hide()
-        window.scrollTo(0, 0);
+        this.$router.go('/')
       } catch (e) {
         alert('There was an error while trying to save this quote.')
       } finally {
         this.saving = false
       }
-    },
-
-    hide() {
-      this.$store.commit('setFormOpen', false)
     }
+  },
+
+  beforeRouteEnter(to, from, next) {
+    next(vm => {
+      if (to.query.t) {
+        vm.text = to.query.t
+      }
+    })
   }
 }
 </script>
 
-<style scoped>
+<style>
 .add-form {
   background-color: white;
   border-radius: var(--radius);

@@ -25,8 +25,9 @@ export default {
   },
 
   methods: {
-    signout() {
-      auth.signOut()
+    async signout() {
+      await auth.signOut()
+      this.$router.push('/auth')
     }
   }
 }

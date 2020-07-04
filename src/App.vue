@@ -1,14 +1,11 @@
 <template>
   <div id="app">
-    <Auth v-if="!user" />
-
-    <div v-else class="content">
+    <template v-if="user">
       <User />
       <Toolbar />
-      <AddForm v-if="formOpen" />
-      <Suggestion v-if="suggestionOpen && !filter" />
-      <List />
-    </div>
+    </template>
+
+    <router-view />
   </div>
 </template>
 
@@ -19,20 +16,7 @@ export default {
   name: 'App',
 
   computed: {
-    ...mapState(['user', 'suggestionOpen', 'formOpen', 'filter'])
-  },
-
-  created() {
-    // Handle bookmarklet input and clean url
-    // FIXME: Doesn't work with IE (any version)
-    const urlParams = new URLSearchParams(location.search)
-    const params = Object.fromEntries(urlParams.entries())
-
-    if (params.t) {
-      this.$store.commit('setBookmarkletText', params.t)
-      this.$store.commit('setFormOpen', true)
-      history.replaceState({}, '', location.href.replace(location.search, ''))
-    }
+    ...mapState(['user'])
   }
 }
 </script>
@@ -43,6 +27,7 @@ export default {
   margin-left: 0.5rem;
   margin-right: 0.5rem;
   display: flex;
+  flex-direction: column;
 }
 @media screen and (min-width: 768px) {
   #app {
@@ -55,9 +40,5 @@ export default {
 .content {
   flex: 1;
   padding-bottom: 3rem; /* Some space at the end */
-}
-
-.list {
-  margin-top: 1rem;
 }
 </style>

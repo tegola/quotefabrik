@@ -16,8 +16,19 @@ const db = firebase.firestore()
 const auth = firebase.auth()
 const user = auth.currentUser
 
+// https://dev.to/gautemeekolsen/vue-guard-routes-with-firebase-authentication-f4l
+const getUser = () => {
+  return new Promise((resolve, reject) => {
+    const unsubscribe = auth.onAuthStateChanged(user => {
+        unsubscribe()
+        resolve(user)
+      }, reject)
+  })
+}
+
 export {
   db,
   auth,
-  user
+  user,
+  getUser
 }

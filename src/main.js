@@ -1,8 +1,6 @@
 import Vue from 'vue'
 import App from '@/App'
 
-import AddForm from '@/components/AddForm'
-import Auth from '@/components/Auth'
 import Button from '@/components/Button'
 import CopyButton from '@/components/CopyButton'
 import Icon from '@/components/Icon'
@@ -14,13 +12,12 @@ import Toolbar from '@/components/Toolbar'
 import User from '@/components/User'
 
 import store from '@/store'
+import router from '@/router'
 
 import '@/assets/css/index.css'
 
 Vue.config.productionTip = false
 
-Vue.component('AddForm', AddForm)
-Vue.component('Auth', Auth)
 Vue.component('Button', Button)
 Vue.component('CopyButton', CopyButton)
 Vue.component('Icon', Icon)
@@ -33,5 +30,6 @@ Vue.component('User', User)
 
 new Vue({
   render: h => h(App),
-  store
+  store,
+  router
 }).$mount('#app')

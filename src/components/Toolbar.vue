@@ -22,12 +22,12 @@
         @click="clear"
       />
     </div>
-     <transition name="slide-fade">
+    <transition name="slide-fade">
       <Button
-        v-if="!filter && !formOpen"
-        class="toolbar__add"
-        title="Add"
-        @click="openForm">
+        tag="router-link"
+        v-if="!filter"
+        to="/add"
+        class="toolbar__add">
         New
       </Button>
     </transition>
@@ -41,7 +41,7 @@ export default {
   name: 'Toolbar',
 
   computed: {
-    ...mapState(['user', 'filter', 'formOpen']),
+    ...mapState(['user', 'filter']),
   },
 
   methods: {
@@ -53,10 +53,6 @@ export default {
     clear() {
       window.scrollTo(0, 0);
       this.$store.commit('setFilter', '')
-    },
-
-    openForm() {
-      this.$store.commit('setFormOpen', true)
     }
   }
 }
@@ -125,8 +121,8 @@ export default {
 
 /* Add */
 .toolbar__add {
-  border-radius: var(--radius-pill);
   font-size: 1rem;
+  line-height: 1.5rem;
   margin-left: 0.5rem;
   padding-left: 2rem;
   padding-right: 2rem;
@@ -138,11 +134,6 @@ export default {
 .toolbar__add.v-enter,
 .toolbar__add.v-leave-to {
   opacity: 50;
-}
-.toolbar__add-icon {
-  position: relative;
-  top: -0.09em;
-  left: 0.01em;
 }
 
 .slide-fade-enter-active,

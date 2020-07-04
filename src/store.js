@@ -13,10 +13,7 @@ const store = new Vuex.Store({
 
     loadingSuggestions: false,
     suggestions: [],
-    suggestionOpen: true,
-
-    formOpen: false,
-		bookmarkletText: ''
+    suggestionOpen: true
 	},
 
 	mutations: {
@@ -39,14 +36,6 @@ const store = new Vuex.Store({
     setSuggestionOpen(state, open) {
       state.suggestionOpen = open
     },
-
-		setFormOpen(state, open) {
-			state.formOpen = open
-    },
-
-		setBookmarkletText(state, text) {
-			state.bookmarkletText = text
-		},
 
 		...vuexfireMutations
 	},

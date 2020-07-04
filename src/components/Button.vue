@@ -1,5 +1,6 @@
 <template>
-  <button
+  <component
+    :is="tag"
     :type="type"
     :class="classes"
     v-bind="$attrs"
@@ -10,12 +11,17 @@
       class="button__icon"
     />
     <slot />
-  </button>
+  </component>
 </template>
 
 <script>
 export default {
   props: {
+    tag: {
+      type: String,
+      default: 'button'
+    },
+
     type: {
       type: String,
       default: 'button'
@@ -58,9 +64,10 @@ export default {
 <style scoped>
 /* Default */
 .button {
+  display: inline-block;
+  padding: 0.5rem 1rem;
   background-color: transparent;
   color: inherit;
-  padding: 0.5rem 1rem;
   border: 0;
   border-radius: var(--radius-pill);
   text-transform: uppercase;
@@ -68,6 +75,7 @@ export default {
   font-weight: bold;
   line-height: 1.25rem;
   letter-spacing: 0.05em;
+  text-decoration: none;
   white-space: nowrap;
   cursor: pointer;
   transition: var(--transition-duration);

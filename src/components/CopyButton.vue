@@ -10,10 +10,8 @@ export default {
   name: 'CopyButton',
 
   props: {
-    quote: {
-      type: Object,
-      required: true
-    }
+    text: String,
+    author: String,
   },
 
   data() {
@@ -25,9 +23,9 @@ export default {
   methods: {
     copy() {
       const el = this.$refs.textarea
-      const text = [this.quote.text, this.quote.author]
-        .filter(i => i)
-        .join('\n –');
+      const text = [this.text, `(${this.author})`]
+        .filter(i => i) // remove empty
+        .join('\n');
 
       el.value = text
       el.select();
@@ -49,3 +47,8 @@ textarea {
   left: -10000px;
 }
 </style>
+
+
+I don't understand this requirement.
+
+Is this related to the suggested quote

@@ -37,7 +37,7 @@ const store = new Vuex.Store({
 	getters: {
 		filteredQuotes: state => {
 			if (state.filter) {
-				const re = new RegExp(state.filter, 'i')
+        const re = new RegExp(state.filter.replace(' ', '|'), 'i')
 
 				return state.quotes.filter(quote => quote.text.match(re) || quote.author.match(re))
 			} else {

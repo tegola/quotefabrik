@@ -2,11 +2,10 @@
   <div class="item">
     <div>
       <blockquote class="quote" v-html="highlight(quote.text)" />
-      <cite v-if="quote.author" class="author" v-html="highlight(quote.author)" />
-      <cite v-else class="author">Anonymous</cite>
+      <cite class="author" v-html="highlight(author)" />
       <small>Added {{ formattedDate }}</small>
     </div>
-    <CopyButton :quote="quote" />
+    <CopyButton :text="quote.text" :author="author" />
     <button type="button" class="button" @click="deleteQuote">Delete</button>
   </div>
 </template>
@@ -27,6 +26,10 @@ export default {
   computed: {
     ...mapState(['filter']),
 
+    author() {
+      return this.quote.author || 'anonymous'
+    },
+
     formattedDate() {
       return this.quote.created_at.toDate().toLocaleString('en', {
         dateStyle: 'long',
@@ -38,7 +41,7 @@ export default {
   methods: {
     highlight(content) {
       if (this.filter) {
-        const re = new RegExp(this.filter, 'ig')
+        const re = new RegExp(this.filter.replace(' ', '|'), 'ig')
         const scopeId = this.$options._scopeId
 
         return content.replace(re, match => {

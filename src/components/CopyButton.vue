@@ -1,6 +1,8 @@
 <template>
   <span>
-    <a href type="button" @click.prevent="copy">{{ copied ? 'Copied' : 'Copy' }}</a>
+    <button type="button" class="button" @click.prevent="copy">
+      <Icon name="copy" />
+    </button>
     <textarea ref="textarea" readonly tabindex="-1"></textarea>
   </span>
 </template>
@@ -47,8 +49,3 @@ textarea {
   left: -10000px;
 }
 </style>
-
-
-I don't understand this requirement.
-
-Is this related to the suggested quote

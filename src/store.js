@@ -44,7 +44,11 @@ const store = new Vuex.Store({
 			if (state.filter) {
         const re = new RegExp(state.filter.replace(' ', '|'), 'i')
 
-				return state.quotes.filter(quote => quote.text.match(re) || quote.author.match(re))
+        return state.quotes.filter(quote => {
+          const author = quote.author || 'anonymous'
+
+          return quote.text.match(re) || author.match(re)
+        })
 			} else {
 				return state.quotes
 			}
@@ -64,7 +68,7 @@ const store = new Vuex.Store({
 
 		unbindQuotesRef: firestoreAction(({ unbindFirestoreRef }) => {
 			return unbindFirestoreRef('quotes')
-		}),
+    }),
 
 		addQuote: ({ state }, { text, author }) => {
 			return db.collection('quotes').add({

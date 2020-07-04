@@ -4,6 +4,7 @@ import App from '@/App'
 import AddForm from '@/components/AddForm'
 import Auth from '@/components/Auth'
 import CopyButton from '@/components/CopyButton'
+import Icon from '@/components/Icon'
 import Item from '@/components/Item'
 import List from '@/components/List'
 import Loader from '@/components/Loader'
@@ -20,6 +21,7 @@ Vue.config.productionTip = false
 Vue.component('AddForm', AddForm)
 Vue.component('Auth', Auth)
 Vue.component('CopyButton', CopyButton)
+Vue.component('Icon', Icon)
 Vue.component('Item', Item)
 Vue.component('List', List)
 Vue.component('Loader', Loader)

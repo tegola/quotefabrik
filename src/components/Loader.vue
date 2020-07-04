@@ -15,6 +15,7 @@ export default {
 <style scoped>
 .loader {
   display: inline-flex;
+  justify-content: center;
 }
 .dot {
   margin: 0 0.15rem;
@@ -33,10 +34,10 @@ export default {
 @keyframes dot {
   /* 2 steps to keep the element centered */
   25% {
-    transform: translateY(-0.25rem)
+    transform: translateY(-0.25em)
   }
   75% {
-    transform: translateY(0.25rem)
+    transform: translateY(0.25em)
   }
 }
 </style>

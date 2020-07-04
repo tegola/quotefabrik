@@ -3,6 +3,10 @@
     <Auth v-if="!user" />
 
     <div v-else class="content">
+      <Icon name="plus" />
+      <Icon name="copy" />
+      <Icon name="close" />
+      <Icon name="trash" />
       <User />
       <Toolbar />
       <AddForm v-if="formOpen" />
@@ -30,6 +34,7 @@ export default {
 
     if (params.t) {
       this.$store.commit('setBookmarkletText', params.t)
+      this.$store.commit('setFormOpen', true)
       history.replaceState({}, '', location.href.replace(location.search, ''))
     }
   }

@@ -1,5 +1,5 @@
 <template>
-  <div v-if="quotes.length">
+  <div v-if="quotes.length" class="list">
     <Item
       v-for="quote in quotes"
       :key="quote.id"

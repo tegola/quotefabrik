@@ -7,7 +7,9 @@
     <div class="actions">
       <CopyButton :text="quote.text" :author="author" />
       <slot name="actions">
-        <button type="button" class="button" @click="deleteQuote">Delete</button>
+        <button type="button" class="button" @click="deleteQuote" title="Delete">
+          <Icon name="trash" />
+        </button>
       </slot>
     </div>
   </div>

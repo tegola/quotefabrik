@@ -12,7 +12,7 @@
         class="button toolbar__search-clear"
         title="Clear search filter"
         @click="clear">
-        &times;
+        <Icon name="close" />
       </button>
     </div>
      <transition name="slide-fade">
@@ -79,19 +79,20 @@ export default {
   flex: 1;
 }
 .toolbar__search-input {
-  border: 1px solid transparent;
+  border: 0;
   height: 100%;
   width: 100%;
   font-size: 1.15rem;
   padding: 0 1rem;
   border-radius: var(--radius);
-  background-color: rgba(var(--dark-rgb), 0.05);
+  background: rgba(var(--dark-rgb), 0.05);
   transition: 200ms;
   outline: none;
 }
 .toolbar__search-input:focus {
   background-color: transparent;
-  border-color: rgba(var(--dark-rgb), 0.1);
+  border-color: transparent;
+  box-shadow: 0 0 0 2px rgba(var(--dark-rgb), 0.1) inset;
 }
 .toolbar__search-clear {
   position: absolute;
@@ -100,12 +101,9 @@ export default {
   margin-top: -0.75rem;
   right: 0.5rem;
 
-  border-radius: calc(var(--radius) / 2);
+  border-radius: 1.5rem;
   width: 1.5rem;
   height: 1.5rem;
-  font-size: 1.4rem;
-  font-weight: 200;
-  letter-spacing: 0;
 }
 
 /* Add */

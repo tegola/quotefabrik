@@ -58,12 +58,10 @@ export default {
 
 <style scoped>
 .toolbar {
-  --radius: 10rem;
-
   display: flex;
 	align-items: stretch;
 	justify-content: space-between;
-  border-radius: var(--radius);
+  border-radius: var(--radius-pill);
   background-color: white;
   padding: 0.5rem;
   height: 56px;
@@ -85,7 +83,7 @@ export default {
   width: 100%;
   font-size: 1.15rem;
   padding: 0 1rem;
-  border-radius: var(--radius);
+  border-radius: var(--radius-pill);
   background: rgba(var(--dark-rgb), 0.05);
   transition: var(--transition-duration);
   outline: none;
@@ -113,7 +111,7 @@ export default {
 
 /* Add */
 .toolbar__add {
-  border-radius: var(--radius);
+  border-radius: var(--radius-pill);
   font-size: 1rem;
   margin-left: 0.5rem;
   padding-left: 2rem;

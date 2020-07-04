@@ -62,7 +62,7 @@ export default {
   color: inherit;
   padding: 0.5rem 1rem;
   border: 0;
-  border-radius: var(--radius-sm);
+  border-radius: var(--radius-pill);
   text-transform: uppercase;
   font-size: 0.9rem;
   font-weight: bold;
@@ -90,6 +90,12 @@ export default {
 }
 .button--dark:disabled {
   color: rgba(255, 255, 255, 0.5);
+}
+
+/* Light */
+.button--light {
+  background-color: var(--light);
+  color: var(--dark);
 }
 
 /* White */

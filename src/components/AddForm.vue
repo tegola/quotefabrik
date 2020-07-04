@@ -17,7 +17,7 @@
         placeholder="(optional)">
     </div>
 
-    <Button type="reset">Cancel</Button>
+    <Button type="reset" variant="light">Cancel</Button>
     <Button type="submit" :disabled="!canSubmit">Save</Button>
 
     <p v-if="saving">Saving...</p>

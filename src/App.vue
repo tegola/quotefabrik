@@ -16,7 +16,25 @@ export default {
   name: 'App',
 
   computed: {
-    ...mapState(['user'])
+    ...mapState(['user']),
+  },
+
+  mounted() {
+    this.bindKeyToUrl('n', '/add')
+    this.bindKeyToUrl('l', '/')
+  },
+
+  methods: {
+    bindKeyToUrl(key, path) {
+      document.body.addEventListener('keyup', e => {
+        const isInput = ['input', 'textarea'].includes(e.target.tagName.toLowerCase())
+        const alreadyThere = this.$route.path === path
+
+        if (e.key === key && !isInput && !alreadyThere) {
+          this.$router.push(path)
+        }
+      })
+    }
   }
 }
 </script>

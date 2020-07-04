@@ -13,7 +13,7 @@ export default {
 
   computed: {
     ...mapState(['suggestionOpen', 'filter'])
-  },
+  }
 }
 </script>
 

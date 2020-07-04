@@ -6,6 +6,7 @@
         class="toolbar__search-icon"
       />
       <input
+        ref="searchInput"
         class="toolbar__search-input"
         type="text"
         placeholder="Search..."
@@ -42,6 +43,17 @@ export default {
 
   computed: {
     ...mapState(['user', 'filter']),
+  },
+
+  mounted() {
+    document.body.addEventListener('keyup', e => {
+      const isInput = ['input', 'textarea'].includes(e.target.tagName.toLowerCase())
+
+      if (e.key === '/' && !isInput) {
+        console.log('focus')
+        this.$refs.searchInput.focus()
+      }
+    })
   },
 
   methods: {

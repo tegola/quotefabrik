@@ -2,7 +2,7 @@
   <form class="add-form" @submit.prevent="submit">
     <div class="form-field">
       <label class="form-field__label" for="text">Quote</label>
-      <textarea class="form-input" v-model="text" id="text" rows="5"></textarea>
+      <textarea class="form-input" rows="5" autofocus v-model="text" id="text"></textarea>
     </div>
 
     <div class="form-field">

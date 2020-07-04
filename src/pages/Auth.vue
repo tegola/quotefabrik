@@ -201,12 +201,12 @@ export default {
   transition: var(--transition-duration);
 }
 .tab:first-child .tab__label {
-  border-top-left-radius: var(--radius-sm);
-  border-bottom-left-radius: var(--radius-sm);
+  border-top-left-radius: var(--radius-pill);
+  border-bottom-left-radius: var(--radius-pill);
 }
 .tab:last-child .tab__label {
-  border-top-right-radius: var(--radius-sm);
-  border-bottom-right-radius: var(--radius-sm);
+  border-top-right-radius: var(--radius-pill);
+  border-bottom-right-radius: var(--radius-pill);
 }
 .tab__radio:checked ~ .tab__label {
   background-color: var(--dark);

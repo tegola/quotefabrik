@@ -7,6 +7,8 @@
       <Toolbar />
       <AddForm v-if="formOpen" />
 
+      <Suggestion />
+
       <template v-if="filteredQuotes.length">
         <Item
           v-for="quote in filteredQuotes"

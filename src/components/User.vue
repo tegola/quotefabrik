@@ -10,7 +10,7 @@ import { mapState } from 'vuex'
 import { auth } from '@/firebase'
 
 export default {
-  name: 'Toolbar',
+  name: 'User',
 
   computed: {
     ...mapState(['user', 'filter', 'formOpen']),

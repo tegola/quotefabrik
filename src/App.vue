@@ -3,10 +3,6 @@
     <Auth v-if="!user" />
 
     <div v-else class="content">
-      <Icon name="plus" />
-      <Icon name="copy" />
-      <Icon name="close" />
-      <Icon name="trash" />
       <User />
       <Toolbar />
       <AddForm v-if="formOpen" />

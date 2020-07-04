@@ -1,6 +1,9 @@
 <template>
-  <span>
-    <button type="button" class="button" @click.prevent="copy">
+  <span class="copy-button">
+    <button type="button" class="button" title="Copy" @click.prevent="copy">
+      <Icon name="copy" />
+    </button>
+    <button v-if="copied" type="button" class="button zoom">
       <Icon name="copy" />
     </button>
     <textarea ref="textarea" readonly tabindex="-1"></textarea>
@@ -37,15 +40,31 @@ export default {
       this.copied = true
       setTimeout(() => {
         this.copied = false
-      }, 1000)
+      }, 400)
     }
   }
 }
 </script>
 
 <style scoped>
+.copy-button {
+  position: relative;
+}
 textarea {
   position: absolute;
   left: -10000px;
+}
+.zoom {
+  position: absolute;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  animation: zoom 300ms
+}
+@keyframes zoom {
+  100% {
+    transform: scale(1.5);
+    opacity: 0;
+  }
 }
 </style>

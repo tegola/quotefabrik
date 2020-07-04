@@ -2,7 +2,7 @@
   <div class="suggestion">
     <div>
       <div class="head">
-        <h3 class="head__label">Suggestion</h3>
+        <p class="head__label">Suggested</p>
         <div>
           <a v-if="currentQuote" class="head__link" type="button" @click="random">
             <Icon name="shuffle" />Get another
@@ -99,7 +99,6 @@ export default {
   border-bottom: 1px solid rgba(var(--dark-rgb), 0.05);
 }
 .head__label {
-  font-size: 0.9rem;
   margin: 0;
 }
 

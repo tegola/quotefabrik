@@ -54,7 +54,11 @@ const store = new Vuex.Store({
 	getters: {
 		filteredQuotes: state => {
 			if (state.filter) {
-        const re = new RegExp(state.filter.replace(' ', '|'), 'i')
+        const reFilter = state.filter
+          .split(' ')
+          .filter(w => w.trim())
+          .join('|')
+        const re = new RegExp(reFilter, 'i')
 
         return state.quotes.filter(quote => {
           const author = quote.author || 'anonymous'

@@ -1,5 +1,5 @@
 <template>
-  <div class="item" tabindex="0">
+  <div class="item">
     <div class="body">
       <blockquote class="quote" v-html="highlight(quote.text)" />
       <cite class="author" v-html="highlight(author)" />
@@ -43,7 +43,11 @@ export default {
   methods: {
     highlight(content) {
       if (this.filter) {
-        const re = new RegExp(this.filter.replace(' ', '|'), 'ig')
+        const reFilter = this.filter
+          .split(' ')
+          .filter(w => w.trim())
+          .join('|')
+        const re = new RegExp(reFilter, 'i')
         const scopeId = this.$options._scopeId
 
         return content.replace(re, match => {

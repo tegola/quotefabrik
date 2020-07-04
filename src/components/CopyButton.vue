@@ -1,11 +1,11 @@
 <template>
   <span class="copy-button">
-    <button type="button" class="button" title="Copy" @click.prevent="copy">
+    <Button title="Copy" @click.prevent="copy">
       <Icon name="copy" />
-    </button>
-    <button v-if="copied" type="button" class="button zoom">
+    </Button>
+    <Button v-if="copied" class="zoom">
       <Icon name="copy" />
-    </button>
+    </Button>
     <textarea ref="textarea" readonly tabindex="-1"></textarea>
   </span>
 </template>
@@ -15,8 +15,7 @@ export default {
   name: 'CopyButton',
 
   props: {
-    text: String,
-    author: String,
+    quote: Object
   },
 
   data() {
@@ -28,7 +27,7 @@ export default {
   methods: {
     copy() {
       const el = this.$refs.textarea
-      const text = [this.text, `(${this.author})`]
+      const text = [this.quote.text, `(${this.quote.author})`]
         .filter(i => i) // remove empty
         .join('\n');
 

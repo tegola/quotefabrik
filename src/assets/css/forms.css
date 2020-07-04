@@ -12,7 +12,7 @@
   display: inline-block;
   width: 100%;
   font: inherit;
-  padding: var(--control-padding);
+  padding: 0.5rem 0.66rem;
   border-radius: var(--radius-sm);
   border: 1px solid rgba(var(--dark-rgb), 0.1);
   outline: none;
@@ -21,27 +21,4 @@
 .form-input:focus {
   border-color: transparent;
   box-shadow: 0 0 0 2px var(--dark) inset;
-}
-
-.button {
-  padding: var(--control-padding);
-  background-color: var(--dark);
-  color: white;
-  border: 0;
-  border-radius: var(--radius-sm);
-  text-transform: uppercase;
-  font-size: 0.8rem;
-  line-height: 1.25rem;
-  letter-spacing: 0.1em;
-  transition: all 200ms, visibility 0;
-}
-.button:disabled {
-  color: rgba(255, 255, 255, 0.5);
-}
-.button:focus {
-  outline: none;
-  box-shadow: 0 0 0 2px rgba(var(--dark-rgb), 0.25);
-}
-.button:active {
-  opacity: var(--active-opacity);
 }

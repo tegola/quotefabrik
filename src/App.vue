@@ -6,7 +6,7 @@
       <User />
       <Toolbar />
       <AddForm v-if="formOpen" />
-      <Suggestion v-if="suggestionOpen" />
+      <Suggestion v-if="suggestionOpen && !filter" />
       <List />
     </div>
   </div>
@@ -19,7 +19,7 @@ export default {
   name: 'App',
 
   computed: {
-    ...mapState(['user', 'suggestionOpen', 'formOpen'])
+    ...mapState(['user', 'suggestionOpen', 'formOpen', 'filter'])
   },
 
   created() {

@@ -5,11 +5,11 @@
       <cite class="author" v-html="highlight(author)" />
     </div>
     <div class="actions">
-      <CopyButton :text="quote.text" :author="author" />
+      <CopyButton :quote="quote" />
       <slot name="actions">
-        <button type="button" class="button" @click="deleteQuote" title="Delete">
+        <Button type="button" @click="deleteQuote" title="Delete">
           <Icon name="trash" />
-        </button>
+        </Button>
       </slot>
     </div>
   </div>

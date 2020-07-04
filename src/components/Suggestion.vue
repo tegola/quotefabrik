@@ -4,22 +4,30 @@
       <div class="head">
         <p class="head__label">Suggested</p>
         <div>
-          <a v-if="currentQuote" class="head__link" type="button" @click="random">
-            <Icon name="shuffle" />Get another
-          </a>
-          <a class="head__link" type="button" @click="hide">
-            <Icon name="close" />Hide
-          </a>
+          <Button
+            v-if="currentQuote"
+            size="sm"
+            icon="shuffle"
+            @click="random">
+            Get another
+          </Button>
+          &nbsp;
+          <Button
+            size="sm"
+            icon="close"
+            @click="hide">
+            Hide
+          </Button>
         </div>
       </div>
 
-      <Loader v-if="loading" />
+      <Loader v-if="loading" size="lg" />
 
       <Item v-else-if="currentQuote" :quote="currentQuote">
         <template #actions>
-          <button class="button" type="button" @click="add">
+          <Button @click="add">
             <Icon name="plus" />
-          </button>
+          </Button>
         </template>
       </Item>
     </div>
@@ -27,41 +35,35 @@
 </template>
 
 <script>
+import { mapState } from 'vuex'
+
 export default {
   name: 'Suggestion',
 
   data() {
     return {
-      loading: false,
-      quotes: [],
-      currentQuote: null
+      index: null
     }
   },
 
-  async mounted() {
-    this.loading = true
+  computed: {
+    ...mapState({
+      loading: 'loadingSuggestions',
+      quotes: 'suggestions'
+    }),
 
-    try {
-      const response = await fetch('https://type.fit/api/quotes')
-      const quotes = await response.json()
-
-      if (!quotes || !quotes.length) {
-        throw new Error('No quotes found.');
-      }
-
-      this.quotes = quotes
-      this.loading = false
-      this.random()
-    } catch (e) {
-      this.hide()
+    currentQuote() {
+      return this.quotes[this.index]
     }
+  },
+
+  async created() {
+    this.random()
   },
 
   methods: {
     random() {
-      const index = Math.floor(Math.random() * (this.quotes.length - 0)) + 0
-
-      this.currentQuote = this.quotes[index];
+      this.index = Math.floor(Math.random() * (this.quotes.length - 0)) + 0
     },
 
     async add() {
@@ -107,10 +109,6 @@ export default {
   display: flex;
   margin: 2rem auto;
   --color: var(--muted);
-}
-.loader /deep/ .dot {
-  width: 0.5rem;
-  height: 0.5rem;
 }
 
 /* Item */

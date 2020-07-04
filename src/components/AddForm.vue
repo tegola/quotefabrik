@@ -10,8 +10,8 @@
       <input class="form-input" type="text" v-model="author" id="author" placeholder="(optional)">
     </div>
 
-    <button class="button" type="reset">Cancel</button>
-    <button class="button" type="submit" :disabled="!canSubmit">Save</button>
+    <Button type="reset">Cancel</Button>
+    <Button type="submit" :disabled="!canSubmit">Save</Button>
 
     <p v-if="saving">Saving...</p>
 

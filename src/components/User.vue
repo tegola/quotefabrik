@@ -1,7 +1,10 @@
 <template>
   <div class="user">
     <h1 class="user__greeting">Hello <strong>{{ user.displayName }}</strong>.</h1>
-    <a class="user__signout" type="button" @click="signout">Sign out</a>
+    <div>
+      <a class="user__signout" type="button" @click="signout">Sign out</a>
+      <Button tag="a" size="sm" @click="signout">Signout</Button>
+    </div>
   </div>
 </template>
 

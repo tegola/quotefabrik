@@ -32,10 +32,10 @@
             v-model="loginModel.password"
             id="password">
         </div>
-        <button class="button" type="submit" :disabled="!canLogin">
-          <Loader v-if="loading" />
+        <Button type="submit" :disabled="!canLogin">
+          <Loader v-if="loading" size="sm" />
           <template v-else>Sign in</template>
-        </button>
+        </Button>
       </form>
 
       <form v-if="action === 'register'" @submit.prevent="register">
@@ -66,10 +66,10 @@
             v-model="registerModel.password"
             id="password">
         </div>
-        <button class="button" type="submit" :disabled="!canRegister">
-          <Loader v-if="loading" />
+        <Button type="submit" :disabled="!canRegister">
+          <Loader v-if="loading" size="sm" />
           <template v-else>Register</template>
-        </button>
+        </Button>
       </form>
     </div>
   </div>

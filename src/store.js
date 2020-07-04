@@ -10,7 +10,11 @@ const store = new Vuex.Store({
 		user: null,
 		quotes: [],
     filter: '',
+
+    loadingSuggestions: false,
+    suggestions: [],
     suggestionOpen: true,
+
     formOpen: false,
 		bookmarkletText: ''
 	},
@@ -22,6 +26,14 @@ const store = new Vuex.Store({
 
 		setFilter(state, filter) {
 			state.filter = filter
+    },
+
+    setLoadingSuggestions(state, loading) {
+      state.loadingSuggestions = loading
+    },
+
+    setSuggestions(state, suggestions) {
+      state.suggestions = suggestions
     },
 
     setSuggestionOpen(state, open) {
@@ -56,6 +68,24 @@ const store = new Vuex.Store({
 	},
 
 	actions: {
+    async loadSuggestions({ commit }) {
+      commit('setLoadingSuggestions', true)
+
+      try {
+        const response = await fetch('https://type.fit/api/quotes')
+        const suggestions = await response.json()
+
+        if (!suggestions || !suggestions.length) {
+          throw new Error('No quotes found.');
+        }
+
+        commit('setSuggestions', suggestions)
+        commit('setLoadingSuggestions', false)
+      } catch (e) {
+        // ...
+      }
+    },
+
 		bindQuotesRef: firestoreAction(({ state, bindFirestoreRef }) => {
 			return bindFirestoreRef(
 				'quotes',
@@ -92,7 +122,8 @@ auth.onAuthStateChanged(user => {
 	store.commit('setUser', user || null)
 
 	if (user) {
-		store.dispatch('bindQuotesRef')
+    store.dispatch('bindQuotesRef')
+    store.dispatch('loadSuggestions')
 	} else {
 		store.dispatch('unbindQuotesRef')
 	}

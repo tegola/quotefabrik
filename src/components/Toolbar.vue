@@ -9,21 +9,20 @@
         @input="search">
       <button
         v-if="filter"
-        class="button toolbar__search-clear"
+        class="toolbar__search-clear"
         title="Clear search filter"
         @click="clear">
         <Icon name="close" />
       </button>
     </div>
      <transition name="slide-fade">
-      <button
+      <Button
         v-if="!filter && !formOpen"
-        type="button"
-        class="button toolbar__add"
+        class="toolbar__add"
         title="Add"
         @click="openForm">
         New
-      </button>
+      </Button>
     </transition>
   </div>
 </template>
@@ -91,27 +90,32 @@ export default {
 }
 .toolbar__search-input:focus {
   background-color: transparent;
-  border-color: transparent;
-  box-shadow: 0 0 0 2px rgba(var(--dark-rgb), 0.1) inset;
 }
 .toolbar__search-clear {
   position: absolute;
-  padding: 0;
   top: 50%;
-  margin-top: -0.75rem;
+  margin-top: -1rem;
   right: 0.5rem;
-
-  border-radius: 1.5rem;
-  width: 1.5rem;
-  height: 1.5rem;
+  padding: 0;
+  border: 0;
+  border-radius: 2rem;
+  width: 2rem;
+  height: 2rem;
+  background-color: var(--light);
+  outline: none;
+}
+.toolbar__search-clear:focus {
+  background-color: var(--dark);
+  color: white;
 }
 
 /* Add */
 .toolbar__add {
   border-radius: var(--radius);
-  font-weight: 300;
   font-size: 1rem;
   margin-left: 0.5rem;
+  padding-left: 2rem;
+  padding-right: 2rem;
 }
 .toobar__add.v-enter-active,
 .toobar__add.v-leave-active {

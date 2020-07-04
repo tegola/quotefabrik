@@ -24,7 +24,6 @@
 }
 
 .button {
-  font: inherit;
   padding: var(--control-padding);
   background-color: var(--dark);
   color: white;
@@ -34,11 +33,9 @@
   font-size: 0.8rem;
   line-height: 1.25rem;
   letter-spacing: 0.1em;
-  cursor: pointer;
   transition: all 200ms, visibility 0;
 }
 .button:disabled {
-  cursor: default;
   color: rgba(255, 255, 255, 0.5);
 }
 .button:focus {

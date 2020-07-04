@@ -1,5 +1,5 @@
 <template>
-  <form @submit.prevent="submit" @reset="hide">
+  <form class="add-form" @submit.prevent="submit" @reset="hide">
     <div class="form-field">
       <label class="form-field__label" for="text">Quote</label>
       <textarea class="form-input" v-model="text" id="text" rows="5"></textarea>
@@ -83,9 +83,15 @@ export default {
 </script>
 
 <style scoped>
+.add-form {
+  background-color: white;
+  border-radius: var(--radius);
+  box-shadow: var(--box-shadow);
+  padding: 1rem;
+}
 .bookmarklet {
-  text-align: center;
-  font-size: 0.9rem;
+  border-top: 1px solid var(--light);
+  margin-bottom: 0;
   color: var(--gray);
 }
 </style>

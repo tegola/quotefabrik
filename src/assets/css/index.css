@@ -1,8 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Nunito&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,400;0,700;1,300&display=swap');
 
-@import "reset.css";
 @import "variables.css";
-@import "scaffolding.css";
+@import "reboot.css";
 @import "forms.css";
 @import "utilities.css";

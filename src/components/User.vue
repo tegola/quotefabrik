@@ -32,7 +32,7 @@ export default {
   justify-content: space-between;
 }
 .user__greeting {
-  font-size: 1rem;
+  font-size: 1.15rem;
 }
 .user__signout {
   color: var(--muted);

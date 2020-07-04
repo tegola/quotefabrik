@@ -1,9 +1,13 @@
 <template>
-  <div>
+  <div class="suggestion">
     <div v-if="currentQuote">
-      <p>Suggestion</p>
-      <button class="button" type="button" @click="random">Another</button>
-      <button class="button" type="button" @click="hide">Hide</button>
+      <div class="head">
+        <h3 class="head__label">Suggestion</h3>
+        <div>
+          <a class="head__link" type="button" @click="random">Get another</a>
+          <a class="head__link" type="button" @click="hide">Hide</a>
+        </div>
+      </div>
       <Item :quote="currentQuote">
         <template #actions>
           <button class="button" type="button" @click="add">Add</button>
@@ -64,6 +68,27 @@ export default {
 }
 </script>
 
-<style>
-
+<style scoped>
+.suggestion {
+  background-color: rgba(var(--dark-rgb), 0.05);
+  margin: 1rem 0.25rem;
+  padding: 0.5rem 1rem;
+  border-radius: var(--radius);
+}
+.head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.25rem 0 0.5rem;
+  color: var(--muted);
+  border-bottom: 1px solid rgba(var(--dark-rgb), 0.05);
+}
+.head__label {
+  font-size: 0.9rem;
+  margin: 0;
+}
+.item {
+  margin-left: -1.25rem;
+  margin-right: -1.25rem;
+}
 </style>

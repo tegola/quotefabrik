@@ -5,39 +5,21 @@
     <div v-else class="content">
       <User />
       <Toolbar />
-
       <AddForm v-if="formOpen" />
-
       <Suggestion v-if="suggestionOpen" />
-
-      <template v-if="filteredQuotes.length">
-        <Item
-          v-for="quote in filteredQuotes"
-          :key="quote.id"
-          :quote="quote"
-        />
-      </template>
-      <div v-else class="no-items">
-        No quotes {{ filter ? 'found' : '' }}
-      </div>
+      <List />
     </div>
   </div>
 </template>
 
 <script>
-import { mapState, mapGetters } from 'vuex'
+import { mapState } from 'vuex'
 
 export default {
   name: 'App',
 
   computed: {
-    ...mapState([
-      'user',
-      'filter',
-      'suggestionOpen',
-      'formOpen'
-      ]),
-    ...mapGetters(['filteredQuotes']),
+    ...mapState(['user', 'suggestionOpen', 'formOpen'])
   },
 
   created() {
@@ -71,14 +53,10 @@ export default {
 
 .content {
   flex: 1;
+  padding-bottom: 3rem; /* Some space at the end */
 }
 
-/* No items */
-.no-items {
-  font-size: 1.5rem;
-  font-weight: 300;
-  text-align: center;
-  margin: 3em 0;
-  color: var(--muted);
+.list {
+  margin-top: 1rem;
 }
 </style>

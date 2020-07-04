@@ -1,0 +1,53 @@
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+html {
+  height: 100%;
+  font-family: var(--font-sans-serif);
+  line-height: 1.25;
+  -webkit-text-size-adjust: 100%;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+body {
+  margin: 0;
+  height: 100%;
+  background-color: var(--light);
+  color: var(--dark);
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-serif);
+  font-weight: 400;
+}
+
+a {
+  color: rgb(133, 106, 89)
+}
+
+input,
+textarea,
+button {
+  margin: 0;
+  font-family: inherit;
+  font-size: inherit;
+  line-height: inherit;
+}
+
+input[type=text],
+input[type=email],
+input[type=password],
+textarea {
+  -webkit-appearance: none;
+}
+
+button {
+  border-radius: 0;
+  -webkit-appearance: button;
+  cursor: pointer;
+}
+button:disabled {
+  cursor: default;
+}

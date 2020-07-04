@@ -1,5 +1,5 @@
 <template>
-  <div class="item">
+  <div class="item" tabindex="0">
     <div>
       <blockquote class="quote" v-html="highlight(quote.text)" />
       <cite class="author" v-html="highlight(author)" />
@@ -66,6 +66,7 @@ export default {
   border-radius: var(--radius);
   transition: 200ms;
   cursor: pointer;
+  outline: none;
 }
 .item:hover {
   background-color: white;
@@ -78,9 +79,10 @@ export default {
   font-family: var(--font-serif);
   font-style: italic;
   font-size: 1.25rem;
+  line-height: 1.35;
 }
 .author {
-  margin-top: 0.25rem;
+  margin-top: 0.5rem;
   display: block;
   font-style: normal;
   color: var(--muted);

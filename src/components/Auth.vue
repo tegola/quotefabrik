@@ -1,78 +1,77 @@
 <template>
   <div class="auth">
     <h2 class="logo">{{ appName }}</h2>
+    <div class="forms">
+      <div class="tabs">
+        <label class="tab">
+          <input class="tab__radio" type="radio" v-model="action" value="login">
+          <div class="tab__label">Sign in</div>
+        </label>
+        <label class="tab">
+          <input class="tab__radio" type="radio" v-model="action" value="register">
+          <div class="tab__label">Register</div>
+        </label>
+      </div>
 
-    <div class="tabs">
-      <label class="tab">
-        <input class="tab__radio" type="radio" v-model="action" value="login">
-        <div class="tab__label">Sign in</div>
-      </label>
-      <label class="tab">
-        <input class="tab__radio" type="radio" v-model="action" value="register">
-        <div class="tab__label">Register</div>
-      </label>
+      <form v-if="action === 'login'" @submit.prevent="login">
+        <div class="form-field">
+          <label class="form-field__label" for="email">E-mail address</label>
+          <input
+            class="form-input"
+            type="email"
+            autocomplete="email"
+            v-model="loginModel.email"
+            id="email">
+        </div>
+        <div class="form-field">
+          <label class="form-field__label" for="password">Password</label>
+          <input
+            class="form-input"
+            type="password"
+            autocomplete="password"
+            v-model="loginModel.password"
+            id="password">
+        </div>
+        <button class="button" type="submit" :disabled="!canLogin">
+          <Loader v-if="loading" />
+          <template v-else>Sign in</template>
+        </button>
+      </form>
+
+      <form v-if="action === 'register'" @submit.prevent="register">
+        <div class="form-field">
+          <label class="form-field__label" for="email">Name</label>
+          <input
+            class="form-input"
+            type="text"
+            autocomplete="given-name"
+            v-model="registerModel.name"
+            id="email">
+        </div>
+        <div class="form-field">
+          <label class="form-field__label" for="email">E-mail address</label>
+          <input
+            class="form-input"
+            type="email"
+            autocomplete="email"
+            v-model="registerModel.email"
+            id="email">
+        </div>
+        <div class="form-field">
+          <label class="form-field__label" for="password">Password</label>
+          <input
+            class="form-input"
+            type="password"
+            autocomplete="password"
+            v-model="registerModel.password"
+            id="password">
+        </div>
+        <button class="button" type="submit" :disabled="!canRegister">
+          <Loader v-if="loading" />
+          <template v-else>Register</template>
+        </button>
+      </form>
     </div>
-
-    <form v-if="action === 'login'" @submit.prevent="login">
-      <div class="form-field">
-        <label class="form-field__label" for="email">E-mail address</label>
-        <input
-          class="form-input"
-          type="email"
-          autocomplete="email"
-          v-model="loginModel.email"
-          id="email">
-      </div>
-      <div class="form-field">
-        <label class="form-field__label" for="password">Password</label>
-        <input
-          class="form-input"
-          type="password"
-          autocomplete="password"
-          v-model="loginModel.password"
-          id="password">
-      </div>
-      <p v-if="loginError">{{ loginError }}</p>
-      <button class="button" type="submit" :disabled="!canLogin">
-        <Loader v-if="loading" />
-        <template v-else>Sign in</template>
-      </button>
-    </form>
-
-    <form v-if="action === 'register'" @submit.prevent="register">
-      <div class="form-field">
-        <label class="form-field__label" for="email">Name</label>
-        <input
-          class="form-input"
-          type="text"
-          autocomplete="given-name"
-          v-model="registerModel.name"
-          id="email">
-      </div>
-      <div class="form-field">
-        <label class="form-field__label" for="email">E-mail address</label>
-        <input
-          class="form-input"
-          type="email"
-          autocomplete="email"
-          v-model="registerModel.email"
-          id="email">
-      </div>
-      <div class="form-field">
-        <label class="form-field__label" for="password">Password</label>
-        <input
-          class="form-input"
-          type="password"
-          autocomplete="password"
-          v-model="registerModel.password"
-          id="password">
-      </div>
-      <p v-if="registerError">{{ registerError }}</p>
-      <button class="button" type="submit" :disabled="!canRegister">
-        <Loader v-if="loading" />
-        <template v-else>Sign in</template>
-      </button>
-    </form>
   </div>
 </template>
 
@@ -82,8 +81,8 @@ import { auth } from '@/firebase'
 const errorMsgs = {
   'auth/email-already-in-use': 'Error: this e-mail is already in use.',
   'auth/invalid-email': 'Error: invalid e-mail address.',
-  'auth/user-disabled': 'Error: your user has been disabled.',
-  'auth/user-not-found': 'Error: user not found.',
+  'auth/user-disabled': 'Error: your account has been disabled.',
+  'auth/user-not-found': "Error: account not found. Please register if you haven't already.",
   'auth/weak-password': 'Error: the specified password is too weak.',
   'auth/wrong-password': 'Error: wrong password'
 }
@@ -95,8 +94,6 @@ export default {
     return {
       action: 'login',
       loading: false,
-      loginError: '',
-      registerError: '',
       loginModel: {
         email: '',
         password: ''
@@ -126,7 +123,6 @@ export default {
   methods: {
     async login() {
       this.loading = true
-      this.loginError = ''
 
       try {
         await auth.signInWithEmailAndPassword(
@@ -134,7 +130,7 @@ export default {
           this.loginModel.password
         )
       } catch (e) {
-        this.loginError = errorMsgs[e.code] || 'There was an error while trying to login.'
+        alert(errorMsgs[e.code] || 'There was an error while trying to login.')
       } finally {
         this.loading = false
       }
@@ -143,7 +139,6 @@ export default {
 
     async register() {
       this.loading = true
-      this.registerError = ''
 
       try {
         const { user } = await auth.createUserWithEmailAndPassword(
@@ -155,7 +150,7 @@ export default {
         })
         this.$store.commit('setUser', user)
       } catch (e) {
-        this.registerError = errorMsgs[e.code] || 'There was an error while trying to register.'
+        alert(errorMsgs[e.code] || 'There was an error while trying to register.')
       } finally {
         this.loading = false
       }
@@ -166,52 +161,57 @@ export default {
 
 <style scoped>
 .auth {
-  width: 300px;
+  width: 280px;
   align-self: center;
   margin-left: auto;
   margin-right: auto;
 }
 .logo {
   text-align: center;
-  text-transform: uppercase;
-  letter-spacing: 0.4em;
-  font-size: 1.25rem;
-  margin: 0;
+  font-size: 1.5rem;
+  margin: -2.5rem 0 1.5rem; /* Vertical centering */
 }
-.tabs {
+.forms {
   background-color: white;
   border-radius: var(--radius);
-  padding: 0.25rem;
-  display: flex;
-  margin-top: 1rem;
-  margin-bottom: 2rem;
   box-shadow: var(--box-shadow);
-  position: relative;
+  padding: 1rem;
+}
+.tabs {
+  display: flex;
+  margin-bottom: 1.5rem;
 }
 .tab {
   cursor: pointer;
   flex: 1;
   text-align: center;
 }
-.tab + .tab {
-  margin-left: 0.25rem;
-}
 .tab__radio {
   position: absolute;
+  left: 0;
+  top: 0;
   opacity: 0.01;
 }
 .tab__label {
   display: block;
-  padding: 0.25rem 0;
-  border-radius: var(--radius-sm);
+  padding: 0.4rem 0;
+  background-color: var(--light);
   transition: 200ms;
 }
-.tab__radio:not(:checked):focus ~ .tab__label {
-  background-color: var(--light);
+.tab:first-child .tab__label {
+  border-top-left-radius: var(--radius-sm);
+  border-bottom-left-radius: var(--radius-sm);
+}
+.tab:last-child .tab__label {
+  border-top-right-radius: var(--radius-sm);
+  border-bottom-right-radius: var(--radius-sm);
 }
 .tab__radio:checked ~ .tab__label {
   background-color: var(--dark);
   color: white;
+}
+.tab__radio:focus ~ .tab__label {
+  box-shadow: 0 0 0 2px rgba(var(--dark-rgb), 0.2);
 }
 .button {
   --color: #fff;

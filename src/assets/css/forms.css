@@ -13,7 +13,7 @@
   width: 100%;
   font: inherit;
   padding: var(--control-padding);
-  border-radius: var(--radius);
+  border-radius: var(--radius-sm);
   border: 1px solid rgba(var(--dark-rgb), 0.1);
   outline: none;
   transition: 200ms;
@@ -29,7 +29,7 @@
   background-color: var(--dark);
   color: white;
   border: 0;
-  border-radius: var(--radius);
+  border-radius: var(--radius-sm);
   text-transform: uppercase;
   font-size: 0.8rem;
   line-height: 1.25rem;
@@ -41,13 +41,10 @@
   cursor: default;
   color: rgba(255, 255, 255, 0.5);
 }
-.button:focus:not(:disabled) {
+.button:focus {
   outline: none;
+  box-shadow: 0 0 0 2px rgba(var(--dark-rgb), 0.25);
 }
-.button:hover:not(:disabled),
-.button:focus:not(:disabled) {
-  box-shadow: 0 0 0 2px white;
-}
-.button:active:not(:disabled) {
+.button:active {
   opacity: var(--active-opacity);
 }

@@ -17,12 +17,12 @@ export default {
   display: inline-flex;
 }
 .dot {
-  margin: 0.15rem;
+  margin: 0 0.15rem;
   width: 0.25rem;
   height: 0.25rem;
   background-color: var(--color, var(--dark));
   border-radius: 50%;
-  animation: dot 1s infinite;
+  animation: dot 1s infinite ease-in-out;
 }
 .dot:nth-child(2) {
   animation-delay: 250ms;
@@ -32,11 +32,11 @@ export default {
 }
 @keyframes dot {
   /* 2 steps to keep the element centered */
-  0%, 100% {
-    transform: translateY(0.25rem);
+  25% {
+    transform: translateY(-0.25rem)
   }
-  50% {
-    transform: translateY(-0.25rem);
+  75% {
+    transform: translateY(0.25rem)
   }
 }
 </style>

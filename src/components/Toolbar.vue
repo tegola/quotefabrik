@@ -50,7 +50,6 @@ export default {
       const isInput = ['input', 'textarea'].includes(e.target.tagName.toLowerCase())
 
       if (e.key === '/' && !isInput) {
-        console.log('focus')
         this.$refs.searchInput.focus()
       }
     })

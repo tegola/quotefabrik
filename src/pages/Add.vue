@@ -71,10 +71,7 @@ export default {
           text: this.text,
           author: this.author
         })
-
-        this.text = ''
-        this.author = ''
-        this.$router.go('/')
+        this.$router.push('/')
       } catch (e) {
         alert('There was an error while trying to save this quote.')
       } finally {

@@ -30,7 +30,9 @@
             icon="plus"
             icon-only
             @click="add"
-          />
+            title="Add">
+            Add
+          </Button>
         </template>
       </Item>
     </div>

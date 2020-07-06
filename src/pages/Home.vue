@@ -1,5 +1,6 @@
 <template>
   <div>
+    <Toolbar />
     <Suggestion v-if="suggestionOpen && !filter" />
     <List />
   </div>

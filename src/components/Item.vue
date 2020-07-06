@@ -74,11 +74,10 @@ export default {
   align-items: stretch;
   justify-content: space-between;
   padding: 0.75rem 1.25rem;
-  border-radius: var(--radius);
-  transition: var(--transition-duration);
-  outline: none;
 }
-
+.item + .item {
+  border-top: 1px solid var(--separator-color);
+}
 
 /* Body */
 .quote {
@@ -139,8 +138,6 @@ export default {
     justify-content: center;
     border-top: 0;
     padding-top: 0;
-    border-left: 1px solid var(--separator-color);
-    padding-left: 1rem;
     margin-left: 1rem;
   }
   .actions .button + .button {
@@ -149,13 +146,22 @@ export default {
   }
 }
 @media (hover: hover) {
+  .item {
+    border-radius: var(--radius);
+    transition: var(--transition-duration);
+  }
   .item:hover {
     background-color: white;
     box-shadow: var(--box-shadow);
   }
+  .item + .item {
+    border-top: 0;
+  }
   .actions {
     opacity: 0;
     transition: var(--transition-duration);
+    border-left: 1px solid var(--separator-color);
+    padding-left: 1rem;
   }
   .item:hover .actions {
     opacity: 1;

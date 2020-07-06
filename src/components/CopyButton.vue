@@ -5,6 +5,7 @@
     icon-only
     :class="copied ? 'zoom' : null"
     @click.prevent="copy">
+    Copy
     <textarea ref="textarea" readonly tabindex="-1"></textarea>
   </Button>
 </template>

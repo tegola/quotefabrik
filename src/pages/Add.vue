@@ -1,39 +1,47 @@
 <template>
-  <form class="add-form" @submit.prevent="submit">
-    <div class="form-field">
-      <label class="form-field__label" for="text">Quote</label>
-      <textarea
-        ref="quoteField"
-        class="form-input"
-        rows="5"
-        v-model="text"
-        id="text"
-      />
-    </div>
+  <div>
+    <form class="form" @submit.prevent="submit">
+      <div class="header">
+        <h2 class="title">Add new quote</h2>
+      </div>
+      <div class="form-field">
+        <label class="form-field__label" for="text">Quote</label>
+        <textarea
+          ref="quoteField"
+          class="form-input"
+          rows="5"
+          v-model="text"
+          id="text"
+        />
+      </div>
 
-    <div class="form-field">
-      <label class="form-field__label" for="author">Author</label>
-      <input
-        class="form-input"
-        type="text"
-        v-model="author"
-        autocorrect="off"
-        spellcheck="false"
-        id="author"
-        placeholder="(optional)">
-    </div>
+      <div class="form-field">
+        <label class="form-field__label" for="author">Author</label>
+        <input
+          class="form-input"
+          type="text"
+          v-model="author"
+          autocorrect="off"
+          spellcheck="false"
+          id="author"
+          placeholder="(optional)">
+      </div>
 
-    <Button tag="router-link" to="/" variant="light">Cancel</Button>
-    <Button type="submit" :disabled="!canSubmit">
-      <Loader v-if="saving" size="sm" />
-      <template v-else>Save</template>
-    </Button>
+      <div class="footer">
+        <Button tag="router-link" to="/" variant="light">Cancel</Button>
+        <Button type="submit" :disabled="!canSubmit">
+          <Loader v-if="saving" size="sm" />
+          <template v-else>Save</template>
+        </Button>
+      </div>
+    </form>
 
-    <p class="bookmarklet">
-      Tip: Save quote from anywhere. Drag the following element to your bookmarks bar:<br>
-      <a :href="bookmarklet" @click.prevent>Save quote</a>
+    <p class="tip">
+      Save quotes from anywhere.<br>
+      Drag the following element to your bookmarks bar:<br>
+      <a :href="bookmarklet" class="bookmarklet">Save quote</a>
     </p>
-  </form>
+  </div>
 </template>
 
 <script>
@@ -90,15 +98,41 @@ export default {
 }
 </script>
 
-<style>
-.add-form {
+<style scoped>
+.form {
   background-color: white;
   border-radius: var(--radius);
   box-shadow: var(--box-shadow);
   padding: 1rem;
 }
+.header {
+  text-align: center;
+  border-bottom: 1px solid var(--separator-color);
+  padding: 0 0 1rem;
+  margin-bottom: 1rem;
+}
+.title {
+  margin: 0;
+}
+.footer {
+  display: flex;
+  justify-content: space-between;
+}
+.tip {
+  text-align: center;
+  color: var(--muted);
+  line-height: 1.5;
+  margin-top: 2rem;
+}
 .bookmarklet {
-  border-top: 1px solid var(--separator-color);
-  margin-bottom: 0;
+  display: inline-block;
+  margin-top: 0.25rem;
+  border-radius: var(--radius-pill);
+  background-color: var(--muted);
+  color: white;
+  text-decoration: none;
+  padding: 0.25rem 1rem;
+  cursor: pointer;
+  font-size: 0.9rem;
 }
 </style>

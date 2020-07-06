@@ -1,9 +1,6 @@
 <template>
   <div id="app">
-    <template v-if="user">
-      <User />
-      <Toolbar />
-    </template>
+    <User v-if="user" />
 
     <router-view />
   </div>

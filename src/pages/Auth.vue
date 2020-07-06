@@ -198,7 +198,7 @@ export default {
   display: block;
   padding: 0.4rem 0;
   background-color: var(--light);
-  transition: var(--transition-duration);
+  transition: var(--transition);
 }
 .tab:first-child .tab__label {
   border-top-left-radius: var(--radius-pill);

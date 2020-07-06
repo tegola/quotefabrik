@@ -1,8 +1,12 @@
 <template>
   <div id="app">
-    <User v-if="user" />
+    <transition name="fade">
+      <User v-if="user" />
+    </transition>
 
-    <router-view />
+    <transition :name="transition" mode="out-in">
+      <router-view />
+    </transition>
   </div>
 </template>
 
@@ -12,8 +16,27 @@ import { mapState } from 'vuex'
 export default {
   name: 'App',
 
+  data() {
+    return {
+      transition: ''
+    }
+  },
+
   computed: {
     ...mapState(['user']),
+  },
+
+  watch: {
+    '$route' (to, from) {
+      if (to.path === '/auth' || from.path === '/auth') {
+        this.transition = 'fade'
+      } else {
+        const toDepth = to.path.length
+        const fromDepth = from.path.length
+
+        this.transition = toDepth < fromDepth ? 'slide-right' : 'slide-left'
+      }
+    }
   },
 
   mounted() {
@@ -52,8 +75,26 @@ export default {
   }
 }
 
-.content {
-  flex: 1;
-  padding-bottom: 3rem; /* Some space at the end */
+.fade-enter-active,
+.fade-leave-active,
+.slide-left-enter-active,
+.slide-left-leave-active,
+.slide-right-enter-active,
+.slide-right-leave-active {
+  transition: var(--transition);
+}
+.fade-leave-to,
+.fade-enter {
+  opacity: 0;
+}
+.slide-left-leave-to,
+.slide-right-enter {
+  transform: translateX(-100px);
+  opacity: 0;
+}
+.slide-left-enter,
+.slide-right-leave-to {
+  transform: translateX(100px);
+  opacity: 0;
 }
 </style>

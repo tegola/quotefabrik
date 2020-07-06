@@ -11,5 +11,5 @@
   --radius-pill: 5rem;
   --box-shadow: 0 1px 1px rgba(var(--dark-rgb), 0.25), 0 3px 5px rgba(var(--dark-rgb), 0.1);
   --separator-color: rgba(var(--dark-rgb), 0.08);
-  --transition-duration: 200ms;
+  --transition: 200ms;
 }

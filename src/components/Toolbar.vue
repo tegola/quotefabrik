@@ -98,7 +98,7 @@ export default {
   padding: 0 1rem 0 2.5rem;
   border-radius: var(--radius-pill);
   background: rgba(var(--dark-rgb), 0.05);
-  transition: var(--transition-duration);
+  transition: var(--transition);
   outline: none;
 }
 .toolbar__search-input:focus {
@@ -138,18 +138,10 @@ export default {
   padding-left: 2rem;
   padding-right: 2rem;
 }
-.toobar__add.v-enter-active,
-.toobar__add.v-leave-active {
-  transition: 1000ms;
-}
-.toolbar__add.v-enter,
-.toolbar__add.v-leave-to {
-  opacity: 50;
-}
 
 .slide-fade-enter-active,
 .slide-fade-leave-active {
-  transition: all 200ms ease-out;
+  transition: all var(--transition) ease-out;
 }
 .slide-fade-enter, .slide-fade-leave-to {
   transform: translateX(1rem);

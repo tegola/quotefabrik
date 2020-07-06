@@ -7,7 +7,7 @@
       <div class="form-field">
         <label class="form-field__label" for="text">Quote</label>
         <textarea
-          ref="quoteField"
+          ref="textField"
           class="form-input"
           rows="5"
           v-model="text"
@@ -67,7 +67,7 @@ export default {
   },
 
   mounted() {
-    this.$refs.quoteField.focus()
+    this.$refs.textField.focus()
   },
 
   methods: {

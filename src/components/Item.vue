@@ -148,7 +148,7 @@ export default {
 @media (hover: hover) {
   .item {
     border-radius: var(--radius);
-    transition: var(--transition-duration);
+    transition: var(--transition);
   }
   .item:hover {
     background-color: white;
@@ -159,7 +159,7 @@ export default {
   }
   .actions {
     opacity: 0;
-    transition: var(--transition-duration);
+    transition: var(--transition);
     border-left: 1px solid var(--separator-color);
     padding-left: 1rem;
   }

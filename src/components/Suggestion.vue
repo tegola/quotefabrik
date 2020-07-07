@@ -23,18 +23,22 @@
 
       <Loader v-if="loading" size="lg" />
 
-      <Item v-else-if="currentQuote" :quote="currentQuote">
-        <template #actions>
-          <Button
-            variant="white"
-            icon="plus"
-            icon-only
-            @click="add"
-            title="Add">
-            Add
-          </Button>
-        </template>
-      </Item>
+      <template v-else-if="currentQuote">
+        <transition name="fade" mode="out-in">
+          <Item :quote="currentQuote" :key="index">
+            <template #actions>
+              <Button
+                variant="white"
+                icon="plus"
+                icon-only
+                @click="add"
+                title="Add">
+                Add
+              </Button>
+            </template>
+          </Item>
+        </transition>
+      </template>
     </div>
   </div>
 </template>

@@ -74,27 +74,4 @@ export default {
     width: 700px;
   }
 }
-
-.fade-enter-active,
-.fade-leave-active,
-.slide-left-enter-active,
-.slide-left-leave-active,
-.slide-right-enter-active,
-.slide-right-leave-active {
-  transition: var(--transition);
-}
-.fade-leave-to,
-.fade-enter {
-  opacity: 0;
-}
-.slide-left-leave-to,
-.slide-right-enter {
-  transform: translateX(-100px);
-  opacity: 0;
-}
-.slide-left-enter,
-.slide-right-leave-to {
-  transform: translateX(100px);
-  opacity: 0;
-}
 </style>

@@ -3,34 +3,34 @@
     <h2 class="logo">{{ appName }}</h2>
     <div class="forms">
       <div class="tabs">
-        <label class="tab">
-          <input class="tab__radio" type="radio" v-model="action" value="login">
+        <label class="tab" for="login">
+          <input class="tab__radio" type="radio" v-model="action" value="login" id="login">
           <div class="tab__label">Sign in</div>
         </label>
-        <label class="tab">
-          <input class="tab__radio" type="radio" v-model="action" value="register">
+        <label class="tab" for="register">
+          <input class="tab__radio" type="radio" v-model="action" value="register" id="register">
           <div class="tab__label">Register</div>
         </label>
       </div>
 
       <form v-if="action === 'login'" @submit.prevent="login">
         <div class="form-field">
-          <label class="form-field__label" for="email">E-mail address</label>
+          <label class="form-field__label" for="login-email">E-mail address</label>
           <input
             class="form-input"
             type="email"
             autocomplete="email"
             v-model="loginModel.email"
-            id="email">
+            id="login-email">
         </div>
         <div class="form-field">
-          <label class="form-field__label" for="password">Password</label>
+          <label class="form-field__label" for="login-password">Password</label>
           <input
             class="form-input"
             type="password"
             autocomplete="password"
             v-model="loginModel.password"
-            id="password">
+            id="login-password">
         </div>
         <Button type="submit" :disabled="!canLogin">
           <Loader v-if="loading" size="sm" />
@@ -40,31 +40,31 @@
 
       <form v-if="action === 'register'" @submit.prevent="register">
         <div class="form-field">
-          <label class="form-field__label" for="email">Name</label>
+          <label class="form-field__label" for="register-name">Name</label>
           <input
             class="form-input"
             type="text"
             autocomplete="given-name"
             v-model="registerModel.name"
-            id="email">
+            id="register-name">
         </div>
         <div class="form-field">
-          <label class="form-field__label" for="email">E-mail address</label>
+          <label class="form-field__label" for="register-email">E-mail address</label>
           <input
             class="form-input"
             type="email"
             autocomplete="email"
             v-model="registerModel.email"
-            id="email">
+            id="register-email">
         </div>
         <div class="form-field">
-          <label class="form-field__label" for="password">Password</label>
+          <label class="form-field__label" for="register-password">Password</label>
           <input
             class="form-input"
             type="password"
             autocomplete="password"
             v-model="registerModel.password"
-            id="password">
+            id="register-password">
         </div>
         <Button type="submit" :disabled="!canRegister">
           <Loader v-if="loading" size="sm" />

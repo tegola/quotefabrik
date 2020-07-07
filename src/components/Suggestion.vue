@@ -31,8 +31,7 @@
                 variant="white"
                 icon="plus"
                 icon-only
-                @click="add"
-                title="Add">
+                @click="add">
                 Add
               </Button>
             </template>

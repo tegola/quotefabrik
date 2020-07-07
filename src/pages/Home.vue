@@ -21,5 +21,6 @@ export default {
 <style scoped>
 .list {
   margin-top: 1rem;
+  margin-bottom: 3rem;
 }
 </style>
